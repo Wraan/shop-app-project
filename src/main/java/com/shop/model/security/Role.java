@@ -9,7 +9,7 @@ import java.util.Set;
 public class Role {
 
     @Id
-    private int roleId;
+    private long roleId;
 
     private String roleName;
 
@@ -18,12 +18,12 @@ public class Role {
 
     public Role(){}
 
-    public Role(int roleId, String roleName) {
+    public Role(long roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
     }
 
-    public int getRoleId() {
+    public long getRoleId() {
         return roleId;
     }
 
