@@ -20,5 +20,8 @@ public class HomeController {
         return new User("user", "password");
     }
 
-    @GetMapping("")
+    @GetMapping("/admin")
+    public String sayHelloToAdmin(){
+        return "Hello admin!";
+    }
 }
