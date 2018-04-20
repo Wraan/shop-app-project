@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HomeController {
-
+public class HomeController{
 
     @GetMapping("/")
     public String sayHello(){
@@ -19,6 +18,4 @@ public class HomeController {
     public User showUser(@PathVariable long id){
         return new User("user", "password");
     }
-
-    @GetMapping("")
 }
