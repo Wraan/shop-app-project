@@ -1,16 +1,14 @@
 package com.shop.model;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User{
 
     @Id
     @GeneratedValue
-    @Column(name = "user_id", unique = true, nullable = false)
+    @Column(name = "user_id")
     private long id;
 
     @NotBlank
@@ -19,11 +17,9 @@ public class User {
     @NotBlank
     private String password;
 
-    public User() {
-    }
+    public User() { }
 
     public User(String username, String password) {
-
         this.username = username;
         this.password = password;
     }
