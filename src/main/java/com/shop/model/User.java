@@ -1,5 +1,6 @@
 package com.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.model.security.Authority;
 import com.shop.model.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
 
     @Id
     @GeneratedValue
@@ -23,19 +27,38 @@ public class User implements UserDetails {
     @NotBlank
     private String username;
 
+    @JsonIgnore
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String email;
+
     private boolean enabled;
+    private boolean banned;
+
+    @NotNull
+    Calendar registrationDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ProductRate> productRates = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ProductObservation> productObservations = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Cart> carts = new HashSet<>();
+
     public User() {}
 
-    public User(String username, String password) {
+    public User(@NotNull Calendar registrationDate, @NotBlank String username, @NotBlank String password, @NotBlank String email) {
+        this.registrationDate = registrationDate;
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public long getId() {
@@ -48,6 +71,10 @@ public class User implements UserDetails {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -70,8 +97,8 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -89,10 +116,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public Set<UserRole> getUserRoles() {
         return userRoles;
     }
@@ -100,4 +123,54 @@ public class User implements UserDetails {
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Calendar getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Calendar registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public Set<ProductRate> getProductRates() {
+        return productRates;
+    }
+
+    public void setProductRates(Set<ProductRate> productRates) {
+        this.productRates = productRates;
+    }
+
+    public Set<ProductObservation> getProductObservations() {
+        return productObservations;
+    }
+
+    public void setProductObservations(Set<ProductObservation> productObservations) {
+        this.productObservations = productObservations;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+
 }
