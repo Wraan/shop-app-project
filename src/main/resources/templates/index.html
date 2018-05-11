@@ -7,36 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>9MEM</title>
+    <title>SHOP-NAME</title>
 
       <!-- Bootstrap core CSS -->
       <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
       <!-- Custom styles for this template -->
       <link href="/css/index.css" rel="stylesheet">
+      <link href="/css/all.css" rel="stylesheet">
 
+      <!-- Icons from Font Awesome-->
       <link href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
-      <style type="text/css">
-          .picture{
-              width: 235px;
-              height: 180px;
-              display: block;
-              margin-left: auto;
-              margin-right: auto;
-          }
-          .card-image{
-              width: 100%;
-              height: 100%;
-              object-fit: contain;
-          }
-      </style>
+
   </head>
   <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
       <div class="container">
           <div class="collapse navbar-collapse mr-auto mt-1 mb-1" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto col-2">
-                <a class="navbar-brand" href="#">SHOP-NAME</a>
+                <a class="navbar-brand" th:href="@{/}">SHOP-NAME</a>
             </div>
             <div class="navbar-nav mr-auto col-8">
                 <div class="input-group ">
@@ -53,15 +42,52 @@
                 </div>
             </div>
             <div class="navbar-nav mr-auto">
-                <a role="button" class="btn btn-primary ml-3 mr-3" href="login.html">Login</a>
-                <a class="nav-item nav-link" href="register.html">Sign up</a>
+                <a role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                <a class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
             </div>
         </div>
       </div>
   </nav>
-
   <div class="container">
       <div class="row">
+          <!-- Login Modal -->
+          <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="offset-2 col-8">
+                                  <div class="well">
+                                      <form id="loginForm" method="POST" th:action="@{/signIn}">
+                                          <div class="form-group">
+                                              <label for="username" class="control-label">Username</label>
+                                              <input type="text" class="form-control" id="username" name="username" required title="Please enter you username" placeholder="example@gmail.com" />
+                                              <span class="help-block"></span>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="password" class="control-label">Password</label>
+                                              <input type="password" class="form-control" id="password" name="password" required title="Please enter your password" />
+                                              <span class="help-block"></span>
+                                          </div>
+                                          <button type="submit" class="btn btn-success btn-block">Login</button>
+                                          <a href="/forgot" class="btn btn-default btn-block">Forgot password</a>
+                                          <a th:href="@{/signUp}" class="btn btn-default btn-block">Register</a>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- End of Login Modal -->
+          <!-- Carousel -->
           <div id="carouselExampleControls" class="carousel slide mt-5" data-ride="carousel" style="width: 100%; height: 100%">
               <div class="carousel-inner" >
                   <div class="carousel-item active">
@@ -83,6 +109,8 @@
                   <span class="sr-only">Next</span>
               </a>
           </div>
+          <!-- End of Carousel -->
+          <!-- Popular this month -->
           <div class="mt-3">
               <h1 class="col-12">Popular this month:</h1>
               <div class="card-group mt-3">
@@ -138,7 +166,7 @@
           </div>
 
           <button class="btn-lg btn-primary text-light offset-5 col-2 mt-3" type="button">More</button>
-
+          <!-- New this month -->
           <div class="mt-3">
               <h1 class="col-12">New this month:</h1>
               <div class="card-group mt-3">

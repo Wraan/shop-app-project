@@ -18,13 +18,13 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-
     @Id
     @GeneratedValue
     @Column(name = "user_id")
     private long id;
 
     @NotBlank
+    @Column(unique = true)
     private String username;
 
     @JsonIgnore
@@ -32,7 +32,26 @@ public class User implements UserDetails {
     private String password;
 
     @NotBlank
+    @Column(unique = true)
     private String email;
+
+    @NotBlank
+    private String firstname;
+
+    @NotBlank
+    private String lastname;
+
+    @NotBlank
+    private String homeAddress;
+
+    @NotBlank
+    private String zipcode;
+
+    @NotBlank
+    private String city;
+
+    @NotBlank
+    private String phone;
 
     private boolean enabled;
 
@@ -55,11 +74,19 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(@NotNull Calendar registrationDate, @NotBlank String username, @NotBlank String password, @NotBlank String email) {
-        this.registrationDate = registrationDate;
+    public User(@NotBlank String username, @NotBlank String password, @NotBlank String email, @NotBlank String firstname,
+                @NotBlank String lastname, @NotBlank String homeAddress, @NotBlank String zipcode, @NotBlank String city,
+                @NotBlank String phone, @NotNull Calendar registrationDate) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.homeAddress = homeAddress;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phone = phone;
+        this.registrationDate = registrationDate;
     }
 
     public long getId() {
@@ -173,5 +200,51 @@ public class User implements UserDetails {
         this.carts = carts;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
