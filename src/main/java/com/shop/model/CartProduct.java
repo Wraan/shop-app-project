@@ -23,8 +23,7 @@ public class CartProduct {
     @JoinColumn(name ="cart_id")
     private Cart cart;
 
-    public CartProduct() {
-    }
+    public CartProduct() {}
 
     public CartProduct(Product product, Cart cart) {
         this.product = product;

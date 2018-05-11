@@ -27,9 +27,7 @@ public class ProductObservation {
         this.product = product;
     }
 
-    public ProductObservation() {
-
-    }
+    public ProductObservation() {}
 
     public long getId() {
         return id;

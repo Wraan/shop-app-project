@@ -35,6 +35,7 @@ public class User implements UserDetails {
     private String email;
 
     private boolean enabled;
+
     private boolean banned;
 
     @NotNull

@@ -48,8 +48,7 @@ public class Product {
     @OneToMany(mappedBy="product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProductRate> rates = new HashSet<>();
 
-    public Product() {
-    }
+    public Product() {}
 
     public Product(@NotBlank String name, @NotBlank String producer, @NotBlank String type, @NotNull double price,
                    @NotNull int amount, @NotBlank String description, @NotNull Calendar addingDate) {
@@ -149,6 +148,4 @@ public class Product {
     public void setRates(Set<ProductRate> rates) {
         this.rates = rates;
     }
-
-
 }

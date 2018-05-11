@@ -23,9 +23,7 @@ public class Image {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Image(){
-
-    }
+    public Image(){}
 
     public Image(String url, Product product){
         this.url = url;
@@ -55,6 +53,4 @@ public class Image {
     public void setProduct(Product product) {
         this.product = product;
     }
-
-
 }

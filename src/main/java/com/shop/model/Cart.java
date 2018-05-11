@@ -29,8 +29,7 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartProduct> cartProducts = new HashSet<>();
 
-    public Cart() {
-    }
+    public Cart() {}
 
     public Cart(@NotNull Calendar purchaseDate, User user) {
         this.purchaseDate = purchaseDate;
@@ -68,5 +67,4 @@ public class Cart {
     public void setCartProducts(Set<CartProduct> cartProducts) {
         this.cartProducts = cartProducts;
     }
-
 }

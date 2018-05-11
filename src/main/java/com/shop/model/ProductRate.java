@@ -17,7 +17,7 @@ public class ProductRate {
     private long id;
 
     @NotNull
-    @Range(min = 1, max = 10)
+    @Range(min = 1, max = 5)
     private int mark;
 
     @NotBlank
@@ -82,5 +82,4 @@ public class ProductRate {
     public void setProduct(Product product) {
         this.product = product;
     }
-
 }

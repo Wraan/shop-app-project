@@ -22,8 +22,7 @@ public class ProductSpecification {
     @JoinColumn(name = "specification_id")
     private Specification specification;
 
-    public ProductSpecification() {
-    }
+    public ProductSpecification() {}
 
     public ProductSpecification(Product product, Specification specification) {
         this.product = product;
@@ -53,6 +52,4 @@ public class ProductSpecification {
     public void setSpecification(Specification specification) {
         this.specification = specification;
     }
-
-
 }

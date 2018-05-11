@@ -23,9 +23,7 @@ public class Specification {
     @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProductSpecification> productSpecification = new HashSet<>();
 
-    public Specification(){
-
-    }
+    public Specification(){}
 
     public Specification(@NotBlank String name, @NotBlank String value) {
         this.name = name;
@@ -63,6 +61,4 @@ public class Specification {
     public void setProductSpecification(Set<ProductSpecification> productSpecification) {
         this.productSpecification = productSpecification;
     }
-
-
 }
