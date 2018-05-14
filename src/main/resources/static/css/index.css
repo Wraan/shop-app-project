@@ -1,21 +1,26 @@
 body {
-  padding-top: 50px;
+    padding-top: 50px;
 }
+
 .header {
-  padding: 40px 15px;
-  text-align: center;
+    padding: 40px 15px;
+    text-align: center;
 }
+
 .crop {
     overflow: hidden;
 }
+
 .crop img {
     height: auto;
     width: 90%;
 }
-nav.ul a:hover{
+
+nav.ul a:hover {
     text-decoration: none !important;
 }
-.anchor{
+
+.anchor {
     display: block;
     height: 45px; /*same height as header*/
     margin-top: -45px; /*same height as header*/

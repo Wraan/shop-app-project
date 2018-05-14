@@ -1,10 +1,6 @@
 package com.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,20 +14,19 @@ public class Cart {
     @Column(name = "cart_id")
     private long id;
 
-    @NotNull
     @Column(name = "purchase_date")
     private Calendar purchaseDate;
 
-    @JsonIgnore
     @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartProduct> cartProducts = new HashSet<>();
 
-    public Cart() {}
+    public Cart() {
+    }
 
-    public Cart(@NotNull Calendar purchaseDate, User user) {
+    public Cart(Calendar purchaseDate, User user) {
         this.purchaseDate = purchaseDate;
         this.user = user;
     }

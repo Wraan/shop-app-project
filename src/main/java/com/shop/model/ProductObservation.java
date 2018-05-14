@@ -1,7 +1,5 @@
 package com.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,10 +8,9 @@ public class ProductObservation {
 
     @Id
     @GeneratedValue
-    @Column(name ="product_observation_id")
+    @Column(name = "product_observation_id")
     private long id;
 
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -27,7 +24,8 @@ public class ProductObservation {
         this.product = product;
     }
 
-    public ProductObservation() {}
+    public ProductObservation() {
+    }
 
     public long getId() {
         return id;
