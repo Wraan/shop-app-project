@@ -19,14 +19,13 @@ public class ApplicationStartup {
     public void checkoutRoles() {
         Role admin = roleRepository.findByRoleIdAndRoleName(1, "ROLE_ADMIN");
         Role user = roleRepository.findByRoleIdAndRoleName(2, "ROLE_USER");
-        if (admin == null || user == null){
+        if (admin == null || user == null) {
             roleRepository.deleteAll();
             roleRepository.saveAll(new ArrayList<Role>() {{
                 add(new Role(1, "ROLE_ADMIN"));
                 add(new Role(2, "ROLE_USER"));
             }});
         }
-
 
 
     }

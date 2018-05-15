@@ -1,64 +1,37 @@
 package com.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.model.security.Authority;
 import com.shop.model.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
 
     @Id
     @GeneratedValue
     @Column(name = "user_id")
     private long id;
 
-    @NotBlank
     @Column(unique = true)
     private String username;
 
-    @JsonIgnore
-    @NotBlank
-    private String password;
-
-    @NotBlank
     @Column(unique = true)
     private String email;
 
-    @NotBlank
-    private String firstname;
-
-    @NotBlank
-    private String lastname;
-
-    @NotBlank
-    private String homeAddress;
-
-    @NotBlank
-    private String zipcode;
-
-    @NotBlank
-    private String city;
-
-    @NotBlank
-    private String phone;
-
+    private String password;
     private boolean enabled;
-
     private boolean banned;
 
-    @NotNull
     Calendar registrationDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
@@ -69,40 +42,17 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProductObservation> productObservations = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cart> carts = new HashSet<>();
 
-    public User() {}
+    public User() {
+    }
 
-    public User(@NotBlank String username, @NotBlank String password, @NotBlank String email, @NotBlank String firstname,
-                @NotBlank String lastname, @NotBlank String homeAddress, @NotBlank String zipcode, @NotBlank String city,
-                @NotBlank String phone, @NotNull Calendar registrationDate) {
+    public User(Calendar registrationDate, String username, String password, String email) {
+        this.registrationDate = registrationDate;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.homeAddress = homeAddress;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.phone = phone;
-        this.registrationDate = registrationDate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override
@@ -134,6 +84,30 @@ public class User implements UserDetails {
         Set<GrantedAuthority> authorities = new HashSet<>();
         userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getRoleName())));
         return authorities;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public String getPassword() {
@@ -200,51 +174,5 @@ public class User implements UserDetails {
         this.carts = carts;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

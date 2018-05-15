@@ -1,7 +1,6 @@
 package com.shop.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,18 +13,16 @@ public class Specification {
     @Column(name = "specification_id")
     private long id;
 
-    @NotBlank
     private String name;
-
-    @NotBlank
     private String value;
 
-    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL)
     private Set<ProductSpecification> productSpecification = new HashSet<>();
 
-    public Specification(){}
+    public Specification() {
+    }
 
-    public Specification(@NotBlank String name, @NotBlank String value) {
+    public Specification(String name, String value) {
         this.name = name;
         this.value = value;
     }

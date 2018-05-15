@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.dto.RegistrationDto;
 import com.shop.model.User;
 import com.shop.model.security.UserRole;
 import com.shop.repository.RoleRepository;
@@ -10,23 +11,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Set;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User createUserFromForm(RegistrationDto registrationDto) {
+        return new User(Calendar.getInstance(), registrationDto.getUsername(), registrationDto.getPassword(), registrationDto.getEmail());
     }
 
     @Override
@@ -40,8 +42,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUserRole(User user) {
-        user.setUserRoles(new HashSet<UserRole>(){{
+        user.setUserRoles(new HashSet<UserRole>() {{
             add(new UserRole(user, roleRepository.findByRoleName("ROLE_USER")));
         }});
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

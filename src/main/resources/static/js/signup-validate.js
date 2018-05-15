@@ -1,9 +1,9 @@
-$("#signUpForm").submit(function(){
+$("#signUpForm").submit(function () {
     var password = $("#pass").val();
     var confirmPassword = $("#repass").val();
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
         alert("Passwords don't match");
-        return false;         
+        return false;
     }
     return true;
 });

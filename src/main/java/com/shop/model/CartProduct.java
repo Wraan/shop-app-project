@@ -1,7 +1,5 @@
 package com.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,17 +11,16 @@ public class CartProduct {
     @Column(name = "cart_product_id")
     private long id;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name ="cart_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public CartProduct() {}
+    public CartProduct() {
+    }
 
     public CartProduct(Product product, Cart cart) {
         this.product = product;

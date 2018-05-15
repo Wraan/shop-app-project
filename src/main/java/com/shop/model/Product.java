@@ -1,72 +1,62 @@
 package com.shop.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 
     @Id
     @GeneratedValue
     @Column(name = "product_id")
     private long id;
-
-    @NotBlank
-    private String name;
-
-    @NotBlank
-    private String producer;
-
-    @NotBlank
-    private String type;
-
-    @NotNull
     private double price;
-
-    @NotNull
     private int amount;
-
-    @Lob
-    @NotBlank
+    private String name;
+    private String producer;
+    private String type;
     private String description;
 
-    @NotNull
     @Column(name = "adding_date")
     private Calendar addingDate;
 
-    @OneToMany(mappedBy="product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProductSpecification> productSpecifications = new HashSet<>();
 
-    @OneToMany(mappedBy="product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Image> images = new HashSet<>();
 
-    @OneToMany(mappedBy="product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProductRate> rates = new HashSet<>();
 
-    public Product() {}
-
-    public Product(@NotBlank String name, @NotBlank String producer, @NotBlank String type, @NotNull double price,
-                   @NotNull int amount, @NotBlank String description, @NotNull Calendar addingDate) {
-        this.name = name;
-        this.producer = producer;
-        this.type = type;
-        this.price = price;
-        this.amount = amount;
-        this.description = description;
-        this.addingDate = addingDate;
+    public Product() {
     }
 
     public long getId() {
         return id;
     }
 
+    public Product(double price, int amount, String name, String producer, String type, String description,
+                   Calendar addingDate, Set<ProductSpecification> productSpecifications, Set<Image> images,
+                   Set<ProductRate> rates) {
+        this.price = price;
+        this.amount = amount;
+        this.name = name;
+        this.producer = producer;
+        this.type = type;
+        this.description = description;
+        this.addingDate = addingDate;
+        this.productSpecifications = productSpecifications;
+        this.images = images;
+        this.rates = rates;
+    }
+
     public void setId(long id) {
         this.id = id;
+
     }
 
     public String getName() {

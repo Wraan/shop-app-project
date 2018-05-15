@@ -1,7 +1,5 @@
 package com.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +11,6 @@ public class ProductSpecification {
     @Column(name = "product_specification_id")
     private long id;
 
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -22,7 +19,8 @@ public class ProductSpecification {
     @JoinColumn(name = "specification_id")
     private Specification specification;
 
-    public ProductSpecification() {}
+    public ProductSpecification() {
+    }
 
     public ProductSpecification(Product product, Specification specification) {
         this.product = product;
