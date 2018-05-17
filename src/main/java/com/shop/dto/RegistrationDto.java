@@ -15,15 +15,29 @@ public class RegistrationDto {
     private String password;
 
     @NotBlank
-    @Email
+    @Pattern(regexp = ".+\\@.+\\..+")
     private String email;
+    private AddressDto addressDto;
 
     public RegistrationDto(@NotBlank @Pattern(regexp = "([a-zA-Z0-9]{6,32}$)") String username,
                            @NotBlank @Pattern(regexp = "([.-^a-zA-Z0-9]{6,32}$)") String password,
-                           @NotBlank @Email String email) {
+                           @NotBlank @Email String email, AddressDto addressDto) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.addressDto = addressDto;
+    }
+
+    public RegistrationDto() {
+        this.addressDto = new AddressDto();
+    }
+
+    public AddressDto getAddressDto() {
+        return addressDto;
+    }
+
+    public void setAddressDto(AddressDto addressDto) {
+        this.addressDto = addressDto;
     }
 
     public String getUsername() {
