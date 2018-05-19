@@ -31,7 +31,7 @@ $("#signUpForm").submit(function () {
     if(!$("#zipCode").val().trim() === "" || !validateItem($("#zipCode"), new RegExp("([0-9]{2}-[0-9]{3}$)"),
             "U need to provide numbers with '-' in format xx-xxx"))
         return false;
-    if(!$("#phone").val().trim() === "" || !validateItem($("#phone"), new RegExp("([0-9]{9}$)"),
+    if(!$("#phone").val().trim() === "" || !validateItem($("#phone"), new RegExp("([0-9]{9,9}$)"),
             "U need to provide 9 numbers"))
         return false;
 
