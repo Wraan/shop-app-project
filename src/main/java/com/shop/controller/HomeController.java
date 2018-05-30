@@ -10,10 +10,4 @@ public class HomeController {
     public String showHomePage() {
         return "index";
     }
-
-    @GetMapping("/product")
-    public String showProductPage() {
-        return "product";
-    }
-
 }
