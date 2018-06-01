@@ -14,6 +14,7 @@ public class Address {
     @ManyToOne
     private User user;
 
+
     private String firstname;
     private String lastname;
     private String city;

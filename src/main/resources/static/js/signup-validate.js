@@ -57,4 +57,3 @@ function checkBothPasswords() {
             '</div>');
     return correct;
 }
-

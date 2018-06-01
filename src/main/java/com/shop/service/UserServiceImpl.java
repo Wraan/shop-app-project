@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.dto.RegistrationDto;
 import com.shop.model.User;
 import com.shop.model.security.UserRole;
 import com.shop.repository.RoleRepository;
@@ -44,5 +45,4 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
 }
