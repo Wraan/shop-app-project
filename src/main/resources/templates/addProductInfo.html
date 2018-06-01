@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SHOP-NAME</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/all.css" rel="stylesheet">
+
+    <link href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse mr-auto mt-1 mb-1" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto col-2">
+                <a class="navbar-brand" th:href="@{/}">SHOP-NAME</a>
+            </div>
+            <div class="navbar-nav mr-auto col-8">
+                <div class="input-group ">
+                    <input style="width: 50%" type="text" class="form-control" placeholder="" aria-label=""
+                           aria-describedby="basic-addon1">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option disabled selected>Choose category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary text-light" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-nav mr-auto">
+                <a role="button" class="btn btn-primary ml-3 mr-3" th:href="login.html">Login</a>
+                <a class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="offset-1 col-10 mt-5">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">Images</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="spec-tab" data-toggle="tab" href="#spec" role="tab" aria-controls="spec" aria-selected="false">Specifications</a>
+                </li>
+            </ul>
+            <form id="signUpForm" th:action="@{/addProduct}" method="post" th:object="${product}">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane show active mt-2" id="info" role="tabpanel" aria-labelledby="info-tab">
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label>Product Name</label>
+                                    <input placeholder="Enter First Name Here.." type="text" class="form-control"
+                                           th:field="*{name}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <label>Price</label>
+                                    <input placeholder="Enter Price Here.." type="number" step="0.01" class="form-control"
+                                           th:field="*{price}" required>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label>Amount</label>
+                                    <input placeholder="Enter Amount Here.." type="number" class="form-control"
+                                           th:field="*{amount}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <label>Type</label>
+                                    <p><select th:field="*{type}" class="custom-select" name="typeSelector">
+                                        <option value="none" disabled selected>Choose category</option>
+                                        <option value="Graphic Card">Graphic Card</option>
+                                        <option value="Monitor">Monitor</option>
+                                        <option value="Processor">Processor</option>
+                                    </select></p>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label>Producer</label>
+                                    <input placeholder="Enter Producer Here.." type="text" class="form-control"
+                                           th:field="*{producer}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label>Description</label>
+                                    <p><textarea th:field="*{description}" class="form-control" rows="5"></textarea></p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane mt-2" id="images" role="tabpanel" aria-labelledby="images-tab">
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label>Images</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control col-6" th:field="*{images[0]}">
+                                    <input type="text" class="form-control col-6" th:field="*{images[1]}">
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control col-6" th:field="*{images[2]}">
+                                    <input type="text" class="form-control col-6" th:field="*{images[3]}">
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control col-6" th:field="*{images[4]}">
+                                    <input type="text" class="form-control col-6" th:field="*{images[5]}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane mt-2" id="spec" role="tabpanel" aria-labelledby="spec-tab">
+                        <div class="row">
+                            <h1>Specifications table gonna there be ( :</h1>
+                            <input id="jsonSpec" th:field="*{jsonSpecifications}" value="" type="hidden">
+                        </div>
+                    </div>
+                </div>
+                <button id="submit" type="submit" class="btn btn-lg btn-info float-right">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="/webjars/popper.js/1.14.1/popper.js"></script>
+<script src="/js/signup-validate.js"></script>
+</body>
+</html>

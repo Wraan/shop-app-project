@@ -13,22 +13,4 @@ public class HomeController {
     public String showHomePage() {
         return "index";
     }
-
-    @GetMapping("/product")
-    public String showProductPage() {
-        return "product";
-    }
-
-    //testing on these two
-    @GetMapping("/addProduct")
-    public String showAddProductPage() {
-        return "addProduct";
-    }
-
-    @PostMapping("/addProduct")
-    @ResponseBody
-    public String addProduct(@RequestParam("json") String json) {
-        return json;
-    }
-
 }
