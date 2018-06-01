@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SHOP-NAME</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
+
+    <!-- Icons from Font Awesome-->
+    <link href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse mr-auto mt-1 mb-1" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto col-2">
+                <a class="navbar-brand" th:href="@{/}">SHOP-NAME</a>
+            </div>
+            <div class="navbar-nav mr-auto col-8">
+                <div class="input-group ">
+                    <input style="width: 50%" type="text" class="form-control" placeholder="" aria-label=""
+                           aria-describedby="basic-addon1">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option disabled selected>Choose category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary text-light" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-nav mr-auto">
+                <a role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
+                   data-target="#login-modal">Login</a>
+                <a class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row mt-5">
+        <!-- Login Modal -->
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="offset-2 col-8">
+                                <div class="well">
+                                    <form id="loginForm" method="POST" th:action="@{/signIn}">
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                   required title="Please enter you username"
+                                                   placeholder="example@gmail.com"/>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                   required title="Please enter your password"/>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                                        <a href="/forgot" class="btn btn-default btn-block">Forgot password</a>
+                                        <a th:href="@{/signUp}" class="btn btn-default btn-block">Register</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Login Modal -->
+        <div class="col-12">
+            <form id="form" class="mb-3" th:action="@{/addProduct}" method="POST">
+                <div id="groups">
+                </div>
+                <input id="json" type="hidden" name="json" value="">
+                <button id="add" type="button" class="btn btn-default">Add new line</button>
+                <button id="submit" type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="/webjars/popper.js/1.14.1/popper.js"></script>
+<script src="/js/add-product.js"></script>
+</body>
+</html>

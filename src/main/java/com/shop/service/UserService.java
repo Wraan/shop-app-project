@@ -10,6 +10,4 @@ public interface UserService {
     User findByUsername(String username);
 
     User register(User user);
-
-    void addUserRole(User user);
 }

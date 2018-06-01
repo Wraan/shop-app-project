@@ -1,55 +1,44 @@
-package com.shop.model;
+package com.shop.dto;
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.Length;
 
-@Entity
-@Table(name = "addresses")
-public class Address {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "address_id")
-    private Long id;
+public class AddressDto {
 
-    @ManyToOne
-    private User user;
-
-
+    @NotBlank
+    @Length(max = 255)
     private String firstname;
+    @NotBlank
+    @Length(max = 255)
     private String lastname;
+    @NotBlank
+    @Length(max = 255)
     private String city;
+    @NotBlank
+    @Length(max = 255)
     private String street;
+    @NotBlank
+    @Pattern(regexp = "([0-9]{2}-[0-9]{3}$)")
     private String zipCode;
+    @NotBlank
+    @Pattern(regexp = "([0-9]{9}$)")
     private String phone;
 
-    public Address(User user, String firstname, String lastname, String city,
-                   String street, String zipCode, String phone) {
+    public AddressDto(@NotBlank @Length(max = 255) String firstname, @NotBlank @Length(max = 255) String lastname,
+                      @NotBlank @Length(max = 255) String city, @NotBlank @Length(max = 255) String street,
+                      @NotBlank @Pattern(regexp = "([0-9]{2}-[0-9]{3}$)") String zipCode,
+                      @NotBlank @Pattern(regexp = "([0-9]{9}$)") String phone) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.user = user;
         this.city = city;
         this.street = street;
         this.zipCode = zipCode;
         this.phone = phone;
     }
 
-    public Address() {
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public AddressDto() {
     }
 
     public String getFirstname() {
@@ -66,14 +55,6 @@ public class Address {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCity() {
@@ -98,5 +79,13 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
