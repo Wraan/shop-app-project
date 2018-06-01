@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head>
     <meta charset="utf-8">
@@ -43,9 +44,21 @@
                 </div>
             </div>
             <div class="navbar-nav mr-auto">
-                <a role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
+                <a sec:authorize="isAnonymous()" role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
                    data-target="#login-modal">Login</a>
-                <a class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+                <a sec:authorize="isAnonymous()" class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+                <div sec:authorize="isAuthenticated()" class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/}">Bought</a>
+                        <a class="dropdown-item" th:href="@{/}">Followed</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/settings}">Settings</a>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -72,7 +85,7 @@
                                             <label for="username" class="control-label">Username</label>
                                             <input type="text" class="form-control" id="username" name="username"
                                                    required title="Please enter you username"
-                                                   placeholder="example@gmail.com"/>
+                                                   placeholder="Login"/>
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
@@ -181,7 +194,6 @@
                 </div>
             </div>
         </div>
-
         <button class="btn-lg btn-primary text-light offset-5 col-2 mt-3" type="button">More</button>
         <!-- New this month -->
         <div class="mt-3">

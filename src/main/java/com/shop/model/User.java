@@ -28,7 +28,10 @@ public class User implements UserDetails {
     private boolean enabled;
     private boolean banned;
 
-    Calendar registrationDate;
+    private Calendar registrationDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses;
