@@ -35,6 +35,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User changeBanStatus(User user) {
+        user.setBanned(!user.isBanned());
+        return updateUser(user);
+    }
+
     private void addUserRole(User user) {
         user.setUserRoles(new HashSet<UserRole>() {{
             add(new UserRole(user, roleRepository.findByRoleName("ROLE_USER")));

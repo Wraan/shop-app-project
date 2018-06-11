@@ -28,4 +28,9 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
+    @Override
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
+    }
+
 }

@@ -8,4 +8,8 @@ public interface UserService {
     User findByUsername(String username);
 
     User register(User user);
+
+    User updateUser(User user);
+
+    User changeBanStatus(User user);
 }
