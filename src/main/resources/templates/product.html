@@ -48,27 +48,14 @@
 </nav>
 
 <div class="container">
-    <div class="row">
+    <div class="row" th:object="${product}">
         <div class="col-6 mt-5">
-            <h4>Laptop HP 15-bs005nw (1WA38EA)</h4>
+            <h4 th:text="*{name}"></h4>
             <div id="photosCarousel" class="carousel slide mt-5" data-ride="carousel"
                  style="width: 540px; height: 370px">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 card-image" src="https://images.morele.net/full/978812_0_f.jpg"
-                             alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 card-image" src="https://images.morele.net/full/978812_1_f.jpg"
-                             alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 card-image" src="https://images.morele.net/full/978812_3_f.jpg"
-                             alt="Third slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 card-image" src="https://images.morele.net/full/978812_4_f.jpg"
-                             alt="Third slide">
+                    <div class="carousel-item" th:each="image:*{images}" th:classappend="${imageStat.first}?'active'">
+                        <img class="d-block w-100 card-image" th:src="${image.url}">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#photosCarousel" role="button" data-slide="prev">
@@ -83,16 +70,16 @@
         </div>
         <div class="col-3 mt-5">
             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                <div class="card-header">Short description</div>
+                <div class="card-header">Information</div>
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-star"></i> Rating: 4.7</h5>
                     <p class="card-text">Bought 42 time(s).</p>
                 </div>
             </div>
             <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                <div class="card-header">Recommendation</div>
+                <div class="card-header">Description</div>
                 <div class="card-body">
-                    <p class="card-text">Don't buy this... It's crap</p>
+                    <p class="card-text" th:text="*{description}"></p>
                 </div>
             </div>
         </div>
@@ -100,7 +87,8 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                 <div class="card-header">Offer</div>
                 <div class="card-body">
-                    <h5 class="card-title">Price: 500,00$</h5>
+                    <h5 class="card-title" th:text="'Price: '+*{price}+'$'"></h5>
+                    <p class="card-text font-weight-bold" th:text="'Amount left: '+*{amount}"></p>
                     <button style="width: 100%" role="button" class="btn-lg btn-danger" href="#"><i
                             class="fas fa-shopping-cart"></i> Add to cart
                     </button>
@@ -113,24 +101,16 @@
         </div>
 
         <div class="mt-4 col-12">
-            <h2 class="mb-4">Specification: </h2>
+            <h2 class="mb-4">Specifications: </h2>
             <table class="table table-striped">
                 <tbody id="tablebody">
                 <tr>
-                    <td style="width: 25%">Producent</td>
-                    <td style="width: 75%">HP</td>
+                    <td style="width: 25%" >Producent</td>
+                    <td style="width: 75%" th:text="*{producer}"></td>
                 </tr>
-                <tr>
-                    <td style="width: 25%">Skrótowa specyfikacja</td>
-                    <td style="width: 75%">15.6'' HDmatt LED/Pentium/4GB/1TB/HD405/USB3/HDMI/BT/11hPRACY/Windows 10</td>
-                </tr>
-                <tr>
-                    <td style="width: 25%">Kolor</td>
-                    <td style="width: 75%">Czarny</td>
-                </tr>
-                <tr>
-                    <td style="width: 25%">Typ</td>
-                    <td style="width: 75%">Laptop</td>
+                <tr th:each="spec:*{productSpecifications}">
+                    <td style="width: 25%" th:text="${spec.specification.name}"></td>
+                    <td style="width: 75%" th:text="${spec.specification.value}"></td>
                 </tr>
                 </tbody>
             </table>
