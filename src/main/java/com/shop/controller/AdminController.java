@@ -42,7 +42,7 @@ public class AdminController {
     }
 
     @PostMapping("/removeProduct")
-    public String removeProduct(@RequestParam("productID") long id)
+    public String removeProduct(@RequestParam("productToRemoveID") long id)
     {
         if(productService.findById(id) != null)
         {
@@ -53,6 +53,25 @@ public class AdminController {
             return "redirect:/adminPage?err";
 
        return "redirect:/adminPage";
+    }
+
+    @PostMapping("/changeProductAmount")
+    public String changeProductAmount(@RequestParam("productToChangeID") long id, @RequestParam("amountToChange") int amount)
+    {
+        if(productService.findById(id) != null )
+        {
+            if(productService.findById(id).getAmount() + amount >= 0)
+            {
+                Product product = productService.findById(id);
+                product.setAmount(product.getAmount() + amount);
+            }
+            else
+                return "redirect:/adminPage?err";
+        }
+        else
+            return "redirect:/adminPage?err";
+
+        return "redirect:/adminPage";
     }
 
 }
