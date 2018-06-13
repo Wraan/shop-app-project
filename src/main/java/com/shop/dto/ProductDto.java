@@ -1,5 +1,7 @@
 package com.shop.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -15,10 +17,13 @@ public class ProductDto {
     @NotNull
     private int amount;
     @NotBlank
+    @Length(max = 255)
     private String name;
     @NotBlank
+    @Length(max = 255)
     private String producer;
     @NotBlank
+    @Length(max = 255)
     private String type;
     @NotBlank
     private String description;

@@ -39,9 +39,8 @@ public class Product {
         return id;
     }
 
-    public Product(double price, int amount, String name, String producer, String type, String description,
-                   Calendar addingDate, Set<ProductSpecification> productSpecifications, Set<Image> images,
-                   Set<ProductRate> rates) {
+    public Product(String name, double price, int amount, String type, String producer, String description,
+                   Calendar addingDate) {
         this.price = price;
         this.amount = amount;
         this.name = name;
@@ -49,9 +48,6 @@ public class Product {
         this.type = type;
         this.description = description;
         this.addingDate = addingDate;
-        this.productSpecifications = productSpecifications;
-        this.images = images;
-        this.rates = rates;
     }
 
     public void setId(long id) {

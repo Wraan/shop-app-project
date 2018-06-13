@@ -18,13 +18,23 @@ public class ProductSpecification {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "specification_id")
     private Specification specification;
+    private int orderNumber;
 
     public ProductSpecification() {
     }
 
-    public ProductSpecification(Product product, Specification specification) {
+    public ProductSpecification(Product product, Specification specification, int orderNumber) {
         this.product = product;
         this.specification = specification;
+        this.orderNumber = orderNumber;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public long getId() {

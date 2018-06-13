@@ -13,4 +13,15 @@ public class HomeController {
     public String showHomePage() {
         return "index";
     }
+
+    @GetMapping("/signIn")
+    public String redirectToHome() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/find")
+    public String findProducts(){
+        return "find-products";
+
+    }
 }
