@@ -22,12 +22,12 @@ public class AdminController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/adminPage")
+    @GetMapping("/admin/adminPage")
     public String showAdminPage(){
         return "adminPage";
     }
 
-    @PostMapping("/changeBanStatus")
+    @PostMapping("/admin/changeBanStatus")
     public String changeBanStatus(@RequestParam("userToChange") String username)
     {
         if(userService.findByUsername(username) != null)
@@ -36,12 +36,12 @@ public class AdminController {
             userService.changeBanStatus(user);
         }
         else
-            return "redirect:/adminPage?err";
+            return "redirect:/admin/adminPage?err";
 
-        return "redirect:/adminPage";
+        return "redirect:/admin/adminPage";
     }
 
-    @PostMapping("/removeProduct")
+    @PostMapping("/admin/removeProduct")
     public String removeProduct(@RequestParam("productToRemoveID") long id)
     {
         if(productService.findById(id) != null)
@@ -50,12 +50,12 @@ public class AdminController {
             productService.deleteProduct(product);
         }
         else
-            return "redirect:/adminPage?err";
+            return "redirect:/admin/adminPage?err";
 
-       return "redirect:/adminPage";
+       return "redirect:/admin/adminPage";
     }
 
-    @PostMapping("/changeProductAmount")
+    @PostMapping("/admin/changeProductAmount")
     public String changeProductAmount(@RequestParam("productToChangeID") long id, @RequestParam("amountToChange") int amount)
     {
         if(productService.findById(id) != null )
@@ -64,14 +64,15 @@ public class AdminController {
             {
                 Product product = productService.findById(id);
                 product.setAmount(product.getAmount() + amount);
+                productService.save(product);
             }
             else
-                return "redirect:/adminPage?err";
+                return "redirect:/admin/adminPage?err";
         }
         else
-            return "redirect:/adminPage?err";
+            return "redirect:/admin/adminPage?err";
 
-        return "redirect:/adminPage";
+        return "redirect:/admin/adminPage";
     }
 
 }

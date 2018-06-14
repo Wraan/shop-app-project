@@ -69,12 +69,12 @@
         </div>
         <div class="offset-4 col-4">
                 <h2>Add product</h2>
-                <a type="button" th:href="@{/addProduct}" class="btn btn-success btn-block">Add Product</a>
+                <a type="button" th:href="@{/admin/addProduct}" class="btn btn-success btn-block">Add Product</a>
         </div>
     </div>
     <div class="row" style="margin-top:20px">
         <div class="offset-4 col-4">
-            <form id="deleteProductForm" method="POST" th:action="@{/removeProduct}">
+            <form id="deleteProductForm" method="POST" th:action="@{/admin/removeProduct}">
                 <div class="form-group">
                 <h2>Remove Product</h2>
                     <input type="number" class="form-control" id="productToRemoveID" name="productToRemoveID"
@@ -87,7 +87,7 @@
     </div>
     <div class="row" style="margin-top:20px">
         <div class="offset-4 col-4">
-            <form id="changeProductAmount" method="POST" th:action="@{/changeProductAmount}">
+            <form id="changeProductAmount" method="POST" th:action="@{/admin/changeProductAmount}">
                 <h2>Change Product Amount</h2>
                 <div class="form-group">
                     <input type="number" class="form-control" id="productToChangeID" name="productToChangeID"
@@ -101,7 +101,7 @@
     </div>
     <div class="row" style="margin-top:20px">
         <div class="offset-4 col-4">
-            <form id="changeBanStatusForm" method="POST" th:action="@{/changeBanStatus}">
+            <form id="changeBanStatusForm" method="POST" th:action="@{/admin/changeBanStatus}">
                 <h2>Change Ban status</h2>
                 <div class="form-group">
                     <input type="text" class="form-control" id="usernameToChange" name="userToChange"

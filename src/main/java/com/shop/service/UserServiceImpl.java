@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User changeBanStatus(User user) {
         user.setBanned(!user.isBanned());
+        user.setEnabled(!user.isEnabled());
         return updateUser(user);
     }
 

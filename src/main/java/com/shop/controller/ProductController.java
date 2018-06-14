@@ -43,7 +43,7 @@ public class ProductController {
             return "redirect:/admin/addProduct?err";
         }
         Product product = productService.save(productDto);
-        return "redirect:/";
+        return "redirect:/admin/addProduct";
     }
 
 }
