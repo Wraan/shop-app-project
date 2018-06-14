@@ -10,4 +10,9 @@ public interface UserService {
     User register(User user);
 
     User addAdminUser();
+
+    User updateUser(User user);
+
+    User changeBanStatus(User user);
+
 }
