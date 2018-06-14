@@ -74,5 +74,4 @@ public class AdminController {
 
         return "redirect:/admin/adminPage";
     }
-
 }

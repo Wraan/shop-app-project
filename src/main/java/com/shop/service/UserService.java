@@ -14,5 +14,4 @@ public interface UserService {
     User updateUser(User user);
 
     User changeBanStatus(User user);
-
 }
