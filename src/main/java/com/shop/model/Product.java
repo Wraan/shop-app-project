@@ -17,7 +17,7 @@ public class Product {
     private int amount;
     private String name;
     private String producer;
-    private String type;
+    private String category;
     private String description;
 
     @Column(name = "adding_date")
@@ -32,27 +32,39 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProductRate> rates = new HashSet<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ProductSubscription> productSubscriptions = new HashSet<>();
+
     public Product() {
+    }
+
+    public Product(String name, double price, int amount, String category, String producer, String description,
+                   Calendar addingDate) {
+        this.price = price;
+        this.amount = amount;
+        this.name = name;
+        this.producer = producer;
+        this.category = category;
+        this.description = description;
+        this.addingDate = addingDate;
     }
 
     public long getId() {
         return id;
     }
 
-    public Product(String name, double price, int amount, String type, String producer, String description,
-                   Calendar addingDate) {
-        this.price = price;
-        this.amount = amount;
-        this.name = name;
-        this.producer = producer;
-        this.type = type;
-        this.description = description;
-        this.addingDate = addingDate;
-    }
 
     public void setId(long id) {
         this.id = id;
 
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -69,14 +81,6 @@ public class Product {
 
     public void setProducer(String producer) {
         this.producer = producer;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public double getPrice() {
@@ -97,6 +101,14 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    public Set<ProductSubscription> getProductSubscriptions() {
+        return productSubscriptions;
+    }
+
+    public void setProductSubscriptions(Set<ProductSubscription> productSubscriptions) {
+        this.productSubscriptions = productSubscriptions;
     }
 
     public void setDescription(String description) {

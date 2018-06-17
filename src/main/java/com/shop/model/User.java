@@ -40,10 +40,10 @@ public class User implements UserDetails {
     private Set<ProductRate> productRates = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ProductObservation> productObservations = new HashSet<>();
+    private Set<Cart> carts = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Cart> carts = new HashSet<>();
+    private Set<ProductSubscription> productSubscriptions = new HashSet<>();
 
     public User() {
     }
@@ -158,20 +158,20 @@ public class User implements UserDetails {
         this.productRates = productRates;
     }
 
-    public Set<ProductObservation> getProductObservations() {
-        return productObservations;
-    }
-
-    public void setProductObservations(Set<ProductObservation> productObservations) {
-        this.productObservations = productObservations;
-    }
-
     public Set<Cart> getCarts() {
         return carts;
     }
 
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
+    }
+
+    public Set<ProductSubscription> getProductSubscriptions() {
+        return productSubscriptions;
+    }
+
+    public void setProductSubscriptions(Set<ProductSubscription> productSubscriptions) {
+        this.productSubscriptions = productSubscriptions;
     }
 
 

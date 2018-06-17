@@ -9,19 +9,21 @@ public class ProductObservation {
     @Id
     @GeneratedValue
     @Column(name = "product_observation_id")
-    private long id;
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "userConnection_id")
+    private UserConnection userConnection;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private Long prodId;
 
-    public ProductObservation(User user, Product product) {
-        this.user = user;
-        this.product = product;
+    private Long startWatchTimestamp;
+    private Long endWatchTimestamp;
+
+    public ProductObservation(UserConnection userConnection, Long prodId) {
+        this.userConnection = userConnection;
+        this.prodId = prodId;
+        startWatchTimestamp = System.nanoTime();
     }
 
     public ProductObservation() {
@@ -31,23 +33,39 @@ public class ProductObservation {
         return id;
     }
 
-    public void setId(long id) {
+    public UserConnection getUserConnection() {
+        return userConnection;
+    }
+
+    public void setUserConnection(UserConnection userConnection) {
+        this.userConnection = userConnection;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getProdId() {
+        return prodId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProdId(Long prodId) {
+        this.prodId = prodId;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getStartWatchTimestamp() {
+        return startWatchTimestamp;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setStartWatchTimestamp(Long startWatchTimestamp) {
+        this.startWatchTimestamp = startWatchTimestamp;
+    }
+
+    public Long getEndWatchTimestamp() {
+        return endWatchTimestamp;
+    }
+
+    public void setEndWatchTimestamp(Long endWatchTimestamp) {
+        this.endWatchTimestamp = endWatchTimestamp;
     }
 }

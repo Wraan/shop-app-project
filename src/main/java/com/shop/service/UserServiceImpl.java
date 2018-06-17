@@ -10,44 +10,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
+    private RoleRepository roleRepository;
     private RoleService roleService;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, RoleService roleService) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.roleService = roleService;
+    }
 
     @Override
     public User register(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         user.setEnabled(true);
         roleService.addUserRole(user);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
         if(userRepository.findByUsername(user.getUsername()) != null || userRepository.findByEmail(user.getEmail()) != null)
             return null;
         return userRepository.save(user);
     }
 
     @Override
-    public User addAdminUser() {
-        User admin = userRepository.findByUsername("admin");
-        if (admin == null) {
-            admin = new User(Calendar.getInstance(), "admin", passwordEncoder.encode("admin"), "admin@admin.com");
-            admin.setEnabled(true);
+    public void addAdminUser() {
+        Optional<User> admin = userRepository.findByUsername("admin");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (!admin.isPresent()) {
+            User user = new User(Calendar.getInstance(), "admin", encoder.encode("admin"), "admin@admin.com");
+            user.setEnabled(true);
             Set<UserRole> userRoles = new HashSet<>();
-            userRoles.add(new UserRole(admin, roleService.findByRoleName("ROLE_USER")));
-            userRoles.add(new UserRole(admin, roleService.findByRoleName("ROLE_ADMIN")));
-            admin.setUserRoles(userRoles);
-            admin = userRepository.save(admin);
+            userRoles.add(new UserRole(user, roleService.findByRoleName("ROLE_USER")));
+            userRoles.add(new UserRole(user, roleService.findByRoleName("ROLE_ADMIN")));
+            user.setUserRoles(userRoles);
+            userRepository.save(user);
         }
-        return admin;
     }
 
     @Override
@@ -64,6 +70,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        Optional<User> byUsername = userRepository.findByUsername(username);
+        if (byUsername.isPresent()) {
+            return byUsername.get();
+        }
+        return null;
+    }
+
+
+    @Override
+    public User findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public Long getIdFromUsername(String username) {
+        Optional<User> byUsername = userRepository.findByUsername(username);
+        if (byUsername.isPresent()) {
+            return byUsername.get().getId();
+        }
+        return 0L;
     }
 }

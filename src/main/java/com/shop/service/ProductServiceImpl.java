@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.*;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -54,6 +56,15 @@ public class ProductServiceImpl implements ProductService {
         return save(product);
     }
 
+    @Override
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product findAllByCategory(String category) {
+        return productRepository.findAllByCategory(category);
+    }
     @Override
     public void deleteProduct(Product product) {
         productRepository.delete(product);
