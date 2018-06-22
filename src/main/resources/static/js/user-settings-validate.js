@@ -12,6 +12,19 @@ $("#emailChangeForm").submit(function () {
     return true;
 });
 
+$("#passwordChangeForm").submit(function () {
+    $(".alert").each(function () {
+        $(this).remove();
+    });
+
+    if(!checkBothPasswords())
+        return false;
+    if(!checkSamePasswords())
+        return false;
+
+    return true;
+});
+
 $("#addNewAddressForm").submit(function () {
     $(".alert").each(function () {
         $(this).remove();
@@ -50,6 +63,29 @@ function checkBothEmails() {
             '</div>');
     return correct;
 }
+
+function checkBothPasswords() {
+    var password = $("#newPassword").val();
+    var confirmPassword = $("#newPasswordConfirm").val();
+    var correct = password === confirmPassword;
+    if (!correct)
+        $("#newPassword").parent().append('<div class="alert alert-danger" role="alert">\n' +
+            'Passwords dont match!' +
+            '</div>');
+    return correct;
+}
+
+function checkSamePasswords() {
+    var password = $("#newPassword").val();
+    var confirmPassword = $("#oldPassword").val();
+    var correct = password === confirmPassword;
+    if (correct)
+        $("#newPassword").parent().append('<div class="alert alert-danger" role="alert">\n' +
+            'Password must be diffrent than the old one!' +
+            '</div>');
+    return !correct;
+}
+
 
 function validateItem(item, regex, alert)
 {

@@ -1,7 +1,9 @@
 package com.shop.service;
 
+import com.shop.dto.AddressDto;
 import com.shop.dto.RegistrationDto;
 import com.shop.dto.SpecificationDto;
+import com.shop.model.Address;
 import com.shop.model.Specification;
 import com.shop.model.User;
 
@@ -12,4 +14,5 @@ public interface DtoService{
     User createUserFromRegistrationDto(RegistrationDto registrationDto);
     List<SpecificationDto> getListSpecificationDtoFromJson(String json);
     List<Specification> convertListSpecificationDtoToListSpecification(List<SpecificationDto> specificationDtoList);
+    Address createAddressFromAddressDto(User user, AddressDto addressDto);
 }

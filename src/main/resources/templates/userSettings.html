@@ -52,7 +52,7 @@
                         <a class="dropdown-item" th:href="@{/}">Bought</a>
                         <a class="dropdown-item" th:href="@{/}">Followed</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/settings}">Settings</a>
+                        <a class="dropdown-item" th:href="@{/user/settings}">Settings</a>
                         <a class="dropdown-item" th:href="@{/logout}">Logout</a>
                     </div>
                 </div>
@@ -62,6 +62,11 @@
 </nav>
 
 <div class="container mt-5" >
+    <div class="row col-4">
+        <div th:if="${param.err != null}" class="alert alert-danger" role="alert">
+            Error occurred. Please try again.
+        </div>
+    </div>
     <div class="row">
         <ul class="nav nav-tabs" id="userSettingsTab" role="tablist">
             <li class="nav-item">
@@ -80,47 +85,52 @@
     </div>
     <div class="tab-content">
         <div id="passwordChangeTab" class="tab-pane show active mt-2">
-            <form id="passwordChangeForm">
+            <form id="passwordChangeForm" th:action="@{/user/changePassword}" method="post">
                 <div class="row">
                     <div class="col-6 form-group" >
                         <label for="oldPassword">Old password</label>
-                        <input type="password" class="form-control" id="oldPassword"  placeholder="Enter old password">
+                        <input type="password" class="form-control" id="oldPassword"  placeholder="Enter old password"
+                                name="oldPassword" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="newPassword">New password</label>
-                        <input type="password" class="form-control" id="newPassword"  placeholder="Enter new password">
+                        <input type="password" class="form-control" id="newPassword"  placeholder="Enter new password"
+                                name="newPassword" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="newPasswordConfirm">Confirm new password</label>
-                        <input type="password" class="form-control" id="newPasswordConfirm"  placeholder="Confirm new password">
+                        <input type="password" class="form-control" id="newPasswordConfirm"  placeholder="Confirm new password"
+                                name="newPasswordConfirm" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Change password</button>
             </form>
         </div>
         <div id="emailChangeTab" class="tab-pane  mt-2">
-            <form id="emailChangeForm" th:action="@{/changeEmail}" method="post" th:object="${currentUser}">
+            <form id="emailChangeForm" th:action="@{/user/changeEmail}" method="post">
                 <div class="row">
                     <div class="col-8 form-group">
                         <label for="newEmail">New e-mail</label>
                         <input type="email" class="form-control" id="newEmail"  placeholder="Enter new email address"
-                               th:field="*{email}" required>
+                               name="newMail" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8 form-group">
                         <label for="newEmailConfirm">Confirm new e-mail</label>
-                        <input type="email" class="form-control" id="newEmailConfirm"  placeholder="Confirm new e-mail">
+                        <input type="email" class="form-control" id="newEmailConfirm"  placeholder="Confirm new e-mail"
+                                required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8 form-group">
                         <label for="changeEmailPassword">Enter password</label>
-                        <input type="password" class="form-control" id="changeEmailPassword"  placeholder="Enter password">
+                        <input type="password" class="form-control" id="changeEmailPassword"  placeholder="Enter password"
+                               name="emailPassword" required>
                     </div>
                 </div>
                 <button type="submit" id="esubmit" class="btn btn-primary">Change e-mail</button>
@@ -132,7 +142,7 @@
         </div>
         <div id="addAddressTab" class="tab-pane mt-2">
             <h3>Add new address</h3>
-            <form id="addNewAddressForm" th:action="@{/addNewAddress}" method="post" th:object="${newAddress}">
+            <form id="addNewAddressForm" th:action="@{/user/addNewAddress}" method="post" th:object="${newAddress}">
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="firstName">First Name</label>
@@ -180,6 +190,6 @@
 <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="/webjars/popper.js/1.14.1/popper.js"></script>
-<script src="/js/user-settings.js"></script>
+<script src="/js/user-settings-validate.js"></script>
 </body>
 </html>
