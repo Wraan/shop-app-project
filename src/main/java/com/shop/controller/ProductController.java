@@ -46,4 +46,9 @@ public class ProductController {
         return "redirect:/admin/addProduct";
     }
 
+    @PostMapping("/searchProduct")
+    public String searchProduct(@RequestParam("searchedProductName") String productName,@RequestParam("searchedCategory") String searchedCategory ){
+        productService.searchProduct(productName,searchedCategory);
+        return "redirect:/";
+    }
 }
