@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SHOP-NAME</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/all.css" rel="stylesheet">
+
+    <link href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse mr-auto mt-1 mb-1" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto col-2">
+                <a class="navbar-brand" th:href="@{/}">SHOP-NAME</a>
+            </div>
+            <div class="navbar-nav mr-auto col-8">
+                <div class="input-group ">
+                    <input style="width: 50%" type="text" class="form-control" placeholder="" aria-label=""
+                           aria-describedby="basic-addon1">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option disabled selected>Choose category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary text-light" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-nav mr-auto">
+                <a sec:authorize="isAnonymous()" role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
+                   data-target="#login-modal">Login</a>
+                <a sec:authorize="isAnonymous()" class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+                <div sec:authorize="isAuthenticated()" class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/}">Bought</a>
+                        <a class="dropdown-item" th:href="@{/}">Followed</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/user/settings}">Settings</a>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5" >
+    <div class="row col-4">
+        <div th:if="${param.err != null}" class="alert alert-danger" role="alert">
+            Error occurred. Please try again.
+        </div>
+    </div>
+    <div class="row">
+        <ul class="nav nav-tabs" id="userSettingsTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#passwordChangeTab" aria-selected="true">Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#emailChangeTab" aria-selected="false">E-mail</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu2" aria-selected="false">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#addAddressTab" aria-selected="false">Add address</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="passwordChangeTab" class="tab-pane show active mt-2">
+            <form id="passwordChangeForm" th:action="@{/user/changePassword}" method="post">
+                <div class="row">
+                    <div class="col-6 form-group" >
+                        <label for="oldPassword">Old password</label>
+                        <input type="password" class="form-control" id="oldPassword"  placeholder="Enter old password"
+                                name="oldPassword" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="newPassword">New password</label>
+                        <input type="password" class="form-control" id="newPassword"  placeholder="Enter new password"
+                                name="newPassword" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="newPasswordConfirm">Confirm new password</label>
+                        <input type="password" class="form-control" id="newPasswordConfirm"  placeholder="Confirm new password"
+                                name="newPasswordConfirm" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Change password</button>
+            </form>
+        </div>
+        <div id="emailChangeTab" class="tab-pane  mt-2">
+            <form id="emailChangeForm" th:action="@{/user/changeEmail}" method="post">
+                <div class="row">
+                    <div class="col-8 form-group">
+                        <label for="newEmail">New e-mail</label>
+                        <input type="email" class="form-control" id="newEmail"  placeholder="Enter new email address"
+                               name="newMail" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 form-group">
+                        <label for="newEmailConfirm">Confirm new e-mail</label>
+                        <input type="email" class="form-control" id="newEmailConfirm"  placeholder="Confirm new e-mail"
+                                required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 form-group">
+                        <label for="changeEmailPassword">Enter password</label>
+                        <input type="password" class="form-control" id="changeEmailPassword"  placeholder="Enter password"
+                               name="emailPassword" required>
+                    </div>
+                </div>
+                <button type="submit" id="esubmit" class="btn btn-primary">Change e-mail</button>
+            </form>
+        </div>
+        <div id="menu2" class="tab-pane ">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+        <div id="addAddressTab" class="tab-pane mt-2">
+            <h3>Add new address</h3>
+            <form id="addNewAddressForm" th:action="@{/user/addNewAddress}" method="post" th:object="${newAddress}">
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName"  placeholder="First Name"
+                               th:field="*{firstname}" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName"  placeholder="Last Name"
+                               th:field="*{lastname}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 form-group">
+                        <label for="street">Home Address</label>
+                        <input type="text" class="form-control" id="street"  placeholder="Home Address"
+                               th:field="*{street}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city"  placeholder="City"
+                               th:field="*{city}" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="zipCode">Zip Code</label>
+                        <input type="text" class="form-control" id="zipCode"  placeholder="Zip Code"
+                               th:field="*{zipCode}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="phoneNumber">Phone</label>
+                        <input type="text" class="form-control" id="phoneNumber"  placeholder="Phone"
+                               th:field="*{phone}" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add address</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="/webjars/popper.js/1.14.1/popper.js"></script>
+<script src="/js/user-settings-validate.js"></script>
+</body>
+</html>
