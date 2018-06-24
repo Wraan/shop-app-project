@@ -23,7 +23,7 @@ public class DtoServiceImpl implements DtoService {
         return user;
     }
 
-    private Address createAddressFromAddressDto(User user, AddressDto addressDto){
+    public Address createAddressFromAddressDto(User user, AddressDto addressDto){
         if(addressDto == null)
             return null;
         return new Address(user, addressDto.getFirstname().trim(), addressDto.getLastname().trim(), addressDto.getCity().trim(),

@@ -63,5 +63,7 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
-
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
+    }
 }

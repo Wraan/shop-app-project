@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/followed",
             "/addCartToSession",
             "/settings",
-            "/settings/**"
+            "/settings/**",
+            "/user/*"
     };
 
     private static final String[] ADMIN_MATCHERS = {

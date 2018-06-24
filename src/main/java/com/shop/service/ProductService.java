@@ -13,4 +13,5 @@ public interface ProductService {
     Product save(ProductDto productDto);
     ProductObservation findProductSubscriptionByUserAndProduct(User user, Product product);
     List<Product> findFollowedProductsByUser(User user);
+    void deleteProduct(Product product);
 }

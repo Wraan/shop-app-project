@@ -48,7 +48,7 @@ public class ProductController {
             return "redirect:/error";
         }
         Product product = productService.save(productDto);
-        return "redirect:/";
+        return "redirect:/admin/addProduct";
     }
 
     @PostMapping("/product/follow/{id}")

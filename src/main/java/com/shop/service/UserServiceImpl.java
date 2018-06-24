@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addAdminUser() {
         User admin = userRepository.findByUsername("admin");
-        if(admin == null){
+        if (admin == null) {
             admin = new User(Calendar.getInstance(), "admin", passwordEncoder.encode("admin"), "admin@admin.com");
             admin.setEnabled(true);
             Set<UserRole> userRoles = new HashSet<>();
@@ -67,6 +67,15 @@ public class UserServiceImpl implements UserService {
             user.getProductObservations().remove(productObservation);
             userRepository.save(user);
         }
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User changeBanStatus(User user) {
+        user.setBanned(!user.isBanned());
+        user.setEnabled(!user.isEnabled());
+        return updateUser(user);
     }
 
     @Override
