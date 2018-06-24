@@ -12,7 +12,6 @@ import java.util.*;
 @Table(name = "users")
 public class User implements UserDetails {
 
-
     @Id
     @GeneratedValue
     @Column(name = "user_id")
@@ -36,10 +35,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ProductRate> productRates = new HashSet<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<ProductObservation> productObservations = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -148,14 +144,6 @@ public class User implements UserDetails {
 
     public void setRegistrationDate(Calendar registrationDate) {
         this.registrationDate = registrationDate;
-    }
-
-    public Set<ProductRate> getProductRates() {
-        return productRates;
-    }
-
-    public void setProductRates(Set<ProductRate> productRates) {
-        this.productRates = productRates;
     }
 
     public Set<ProductObservation> getProductObservations() {

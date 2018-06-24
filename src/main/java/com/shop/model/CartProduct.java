@@ -11,11 +11,11 @@ public class CartProduct {
     @Column(name = "cart_product_id")
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 

@@ -89,12 +89,16 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="'Price: '+*{price}+'$'"></h5>
                     <p class="card-text font-weight-bold" th:text="'Amount left: '+*{amount}"></p>
-                    <button style="width: 100%" role="button" class="btn-lg btn-danger" href="#"><i
-                            class="fas fa-shopping-cart"></i> Add to cart
-                    </button>
-                    <button role="button" class="btn-sm btn-secondary my-2" href="#"><i class="fas fa-heart"></i> Add to
-                        favourities
-                    </button>
+                    <form method="post" th:action="@{/cart/add/{id}(id=${product.id})}">
+                        <button style="width: 100%" type="submit" class="btn-lg btn-danger">
+                            <i class="fas fa-shopping-cart"></i> Add to cart
+                        </button>
+                    </form>
+                    <form method="post" th:action="@{/product/follow/{id}(id=${product.id})}">
+                        <button type="submit" class="btn-sm btn-secondary my-2" ><i class="fas fa-heart"></i> Add to
+                            favourites
+                        </button>
+                    </form>
                     <p class="card-text font-weight-bold">Free shipping!</p>
                 </div>
             </div>

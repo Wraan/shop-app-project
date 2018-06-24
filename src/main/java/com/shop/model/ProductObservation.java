@@ -11,11 +11,11 @@ public class ProductObservation {
     @Column(name = "product_observation_id")
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "product_id")
     private Product product;
 

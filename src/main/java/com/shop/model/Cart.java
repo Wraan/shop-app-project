@@ -1,9 +1,7 @@
 package com.shop.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "carts")
@@ -19,9 +17,9 @@ public class Cart {
 
     @ManyToOne
     private User user;
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartProduct> cartProducts = new HashSet<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<CartProduct> cartProducts = new ArrayList<>();
+    private boolean bought;
 
     public Cart() {
     }
@@ -29,6 +27,18 @@ public class Cart {
     public Cart(Calendar purchaseDate, User user) {
         this.purchaseDate = purchaseDate;
         this.user = user;
+    }
+
+    public Cart(User user) {
+        this.user = user;
+    }
+
+    public List<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(List<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
     }
 
     public long getId() {
@@ -55,11 +65,11 @@ public class Cart {
         this.user = user;
     }
 
-    public Set<CartProduct> getCartProducts() {
-        return cartProducts;
+    public boolean isBought() {
+        return bought;
     }
 
-    public void setCartProducts(Set<CartProduct> cartProducts) {
-        this.cartProducts = cartProducts;
+    public void setBought(boolean bought) {
+        this.bought = bought;
     }
 }

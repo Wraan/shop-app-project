@@ -1,13 +1,18 @@
 package com.shop.controller;
 
+import com.shop.service.UserService;
+import com.shop.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UserService userService;
+    @Autowired
+    CartService cartService;
 
     @GetMapping("/")
     public String showHomePage() {
@@ -22,6 +27,9 @@ public class HomeController {
     @GetMapping("/find")
     public String findProducts(){
         return "find-products";
-
     }
+
+    @GetMapping("/error")
+    public String showError(){ return "error"; }
+
 }

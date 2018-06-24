@@ -8,7 +8,6 @@ import com.shop.model.User;
 import java.util.List;
 
 public interface DtoService{
-
     User createUserFromRegistrationDto(RegistrationDto registrationDto);
     List<SpecificationDto> getListSpecificationDtoFromJson(String json);
     List<Specification> convertListSpecificationDtoToListSpecification(List<SpecificationDto> specificationDtoList);
