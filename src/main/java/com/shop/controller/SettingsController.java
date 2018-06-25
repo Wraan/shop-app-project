@@ -1,19 +1,19 @@
 package com.shop.controller;
 
 import com.shop.dto.AddressDto;
+import com.shop.model.Address;
 import com.shop.model.User;
+import com.shop.service.AddressService;
 import com.shop.service.DtoService;
 import com.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class SettingsController {
@@ -24,10 +24,16 @@ public class SettingsController {
     @Autowired
     DtoService dtoService;
 
+    @Autowired
+    AddressService addressService;
+
     @GetMapping("/user/settings")
-    public String showSettings(Model model){
+    public String showSettings(Model model,Principal principal){
         model.addAttribute("newAddress",new AddressDto());
-        return "userSettings";
+        User user = userService.findByUsername(principal.getName());
+        List<Address> addresses = user.getAddresses();
+        model.addAttribute("addressessList", addresses);
+        return "settings-panel";
     }
 
     @PostMapping("/user/changeEmail")
@@ -64,4 +70,13 @@ public class SettingsController {
             return "redirect:/user/settings?err";
     }
 
+    @PostMapping("/user/deleteAddress/{id}")
+    public String deleteAddress(@PathVariable("id") long id, Principal principal)
+    {
+        User user = userService.findByUsername(principal.getName());
+        Address address = addressService.getByID(id);
+        System.out.println("Kappa");
+        userService.deleteUserAddress(address,user);
+        return "redirect:/user/settings";
+    }
 }

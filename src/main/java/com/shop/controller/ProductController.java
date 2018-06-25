@@ -9,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -80,10 +76,17 @@ public class ProductController {
         model.addAttribute("products", products);
         return "find-products";
     }
+
     @GetMapping("/category/{category}")
     public String showCategory(@PathVariable("category") String category, Model model){
         List<Product> products = productService.searchProductByCategory(category);
         model.addAttribute("products", products);
         return "find-products";
+    }
+
+    @GetMapping("/newest")
+    public String newest(){
+        productService.findNewestProducts(4);
+        return "redirect:/";
     }
 }

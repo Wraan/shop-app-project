@@ -3,7 +3,7 @@ $("#signUpForm").submit(function () {
         $(this).remove();
     });
 
-    if(!validateItem($("#username"), new RegExp("([a-zA-Z0-9]{6,32}$)"),
+    if(!validateItem($("#formUsername"), new RegExp("([a-zA-Z0-9]{6,32}$)"),
             "Username should contain 6 to 32 characters. You can use lower and upper case letters and numbers."))
         return false;
     if(!validateItem($("#email"), new RegExp(".+\\@.+\\..+")

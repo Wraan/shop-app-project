@@ -226,8 +226,18 @@
             </form>
         </div>
         <div id="menu2" class="tab-pane ">
-            <h3>Menu 2</h3>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            <div th:each="address:${addressessList}" class="card" style="margin-top: 10px">
+                <div class="card-body">
+                    <h5><p th:text="${address.firstname}+' '+${address.lastname}" class="card-link"></p> </h5>
+                    <h5><p th:text="${address.street}" class="card-link"></p> </h5>
+                    <h5><p th:text="${address.zipCode}+' '+${address.city}" class="card-link"></p> </h5>
+                    <h5><p th:text="'Phone: '+${address.phone}" class="card-link"></p> </h5>
+                    <form th:action="@{/user/deleteAddress/{id}(id=${address.id})}" th:method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
         <div id="addAddressTab" class="tab-pane mt-2">
             <h3>Add new address</h3>

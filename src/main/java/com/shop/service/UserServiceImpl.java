@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.model.Address;
 import com.shop.model.Product;
 import com.shop.model.ProductObservation;
 import com.shop.model.User;
@@ -68,6 +69,13 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         }
     }
+
+    @Override
+    public void deleteUserAddress(Address address, User user) {
+        user.getAddresses().remove(address);
+        userRepository.save(user);
+    }
+
     public User updateUser(User user) {
         return userRepository.save(user);
     }

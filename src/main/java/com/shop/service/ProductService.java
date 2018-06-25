@@ -5,6 +5,7 @@ import com.shop.model.Product;
 import com.shop.model.ProductObservation;
 import com.shop.model.User;
 
+import java.util.Calendar;
 import java.util.List;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface ProductService {
 
     List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
     List<Product> searchProductByCategory(String category);
+    List<Product> findNewestProducts(int inumberOfProducts);
 }

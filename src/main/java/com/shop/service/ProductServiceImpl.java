@@ -133,6 +133,16 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductByCategory(category);
     }
 
+    @Override
+    public List<Product> findNewestProducts(int numberOfProducts) {
+        List<Product> resultSet = productRepository.findFourNewestProducts();
+        List<Product> newestProducts = new ArrayList<>();
+        for(int i =0;i<numberOfProducts;i++){
+            newestProducts.add(resultSet.get(i));
+        }
+        return  newestProducts;
+    }
+
     private List<Product> searchProductByName(String searchedProductName) {
         List<Product> resultList;
         resultList = productRepository.findProductByName(searchedProductName);

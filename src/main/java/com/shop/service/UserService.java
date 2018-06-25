@@ -1,8 +1,7 @@
 package com.shop.service;
 
-import com.shop.dto.RegistrationDto;
+import com.shop.model.Address;
 import com.shop.model.Product;
-import com.shop.model.ProductObservation;
 import com.shop.model.User;
 
 public interface UserService {
@@ -12,6 +11,7 @@ public interface UserService {
     User addAdminUser();
     void addProductSubscriptionToUser(Product product, User user);
     void deleteProductSubscriptionFromUser(Product product, User user);
+    void deleteUserAddress(Address address, User user);
     User updateUser(User user);
     User changeBanStatus(User user);
 }

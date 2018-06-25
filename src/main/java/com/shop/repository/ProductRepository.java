@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -28,4 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.type like %:#{#productCategory}%")
     List<Product> findProductByCategory(@Param(value = "productCategory") String productCategory);
+
+    @Query("select p from Product p order by  p.addingDate desc ")
+    List<Product> findFourNewestProducts();
 }
