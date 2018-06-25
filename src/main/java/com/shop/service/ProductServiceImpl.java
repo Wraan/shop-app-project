@@ -1,6 +1,5 @@
 package com.shop.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.dto.ProductDto;
 import com.shop.dto.SpecificationDto;
 import com.shop.model.Image;
@@ -8,11 +7,10 @@ import com.shop.model.Product;
 import com.shop.model.ProductSpecification;
 import com.shop.model.Specification;
 import com.shop.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -57,5 +55,29 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Product product) {
         productRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> searchProduct(String searchedProductName, String searchedProductCategory) {
+        if(searchedProductCategory.equals("All"))
+            return searchProductByName(searchedProductName);
+        else
+            return searchProductByNameAndCategory(searchedProductName,searchedProductCategory);
+    }
+
+    private List<Product> searchProductByName(String searchedProductName) {
+        List<Product> resultList;
+        resultList = productRepository.findProductByName(searchedProductName);
+        return resultList;
+    }
+
+    private List<Product> searchProductByNameAndCategory(String searchedProductName, String searchedProductCategory) {
+        List<Product> resultList;
+        resultList = productRepository.findProductByNameAndCategory(searchedProductName,searchedProductCategory);
+        for (Product p:resultList
+             ) {
+            System.out.println(p.getName()+p.getType());
+        }
+        return resultList;
     }
 }

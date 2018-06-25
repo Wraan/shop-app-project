@@ -3,6 +3,8 @@ package com.shop.service;
 import com.shop.dto.ProductDto;
 import com.shop.model.Product;
 
+import java.util.List;
+
 public interface ProductService {
     Product findById(long id);
 
@@ -11,4 +13,6 @@ public interface ProductService {
     Product save(ProductDto productDto);
 
     void deleteProduct(Product product);
+
+    List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
 }
