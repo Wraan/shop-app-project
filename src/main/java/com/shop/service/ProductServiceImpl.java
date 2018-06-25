@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -65,5 +66,29 @@ public class ProductServiceImpl implements ProductService {
 
     public void deleteProduct(Product product) {
         productRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> searchProduct(String searchedProductName, String searchedProductCategory) {
+        if(searchedProductCategory.equals("All"))
+            return searchProductByName(searchedProductName);
+        else
+            return searchProductByNameAndCategory(searchedProductName,searchedProductCategory);
+    }
+
+    private List<Product> searchProductByName(String searchedProductName) {
+        List<Product> resultList;
+        resultList = productRepository.findProductByName(searchedProductName);
+        return resultList;
+    }
+
+    private List<Product> searchProductByNameAndCategory(String searchedProductName, String searchedProductCategory) {
+        List<Product> resultList;
+        resultList = productRepository.findProductByNameAndCategory(searchedProductName,searchedProductCategory);
+        for (Product p:resultList
+             ) {
+            System.out.println(p.getName()+p.getType());
+        }
+        return resultList;
     }
 }

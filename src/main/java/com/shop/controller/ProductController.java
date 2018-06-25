@@ -50,7 +50,6 @@ public class ProductController {
         Product product = productService.save(productDto);
         return "redirect:/admin/addProduct";
     }
-
     @PostMapping("/product/follow/{id}")
     public String followProduct(@PathVariable("id") long id, Principal principal){
         User user = userService.findByUsername(principal.getName());
@@ -74,5 +73,9 @@ public class ProductController {
 
         return "redirect:/followed";
     }
-
+    @PostMapping("/searchProduct")
+    public String searchProduct(@RequestParam("searchedProductName") String productName,@RequestParam("searchedCategory") String searchedCategory ){
+        productService.searchProduct(productName,searchedCategory);
+        return "redirect:/";
+    }
 }

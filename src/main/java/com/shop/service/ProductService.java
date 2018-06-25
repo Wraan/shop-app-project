@@ -7,6 +7,8 @@ import com.shop.model.User;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface ProductService {
     Product findById(long id);
     Product save(Product product);
@@ -14,4 +16,6 @@ public interface ProductService {
     ProductObservation findProductSubscriptionByUserAndProduct(User user, Product product);
     List<Product> findFollowedProductsByUser(User user);
     void deleteProduct(Product product);
+
+    List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
 }
