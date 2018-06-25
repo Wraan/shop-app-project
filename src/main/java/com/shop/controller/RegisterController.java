@@ -1,7 +1,6 @@
 package com.shop.controller;
 
 import com.shop.dto.RegistrationDto;
-import com.shop.model.User;
 import com.shop.service.DtoService;
 import com.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-import java.util.Arrays;
-
-
 @Controller
 public class RegisterController {
 
     @Autowired
     UserService userService;
-
     @Autowired
     DtoService dtoService;
 
@@ -39,12 +34,12 @@ public class RegisterController {
         if(result.hasErrors()) {
             for(FieldError fieldError : result.getFieldErrors()){
                 if(!fieldError.getField().split("\\.")[0].equals("addressDto"))
-                    return "redirect:/signUp?err";
+                    return "error";
             }
             registrationDto.setAddressDto(null);
         }
         if(userService.register(dtoService.createUserFromRegistrationDto(registrationDto)) == null)
-            return "redirect:/signUp?err";
+            return "redirect:/error";
         return "redirect:/";
     }
 }

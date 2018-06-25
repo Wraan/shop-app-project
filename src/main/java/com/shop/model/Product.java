@@ -1,9 +1,7 @@
 package com.shop.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -29,14 +27,13 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Image> images = new HashSet<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ProductRate> rates = new HashSet<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<CartProduct> cartProducts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<ProductObservation> productObservations = new HashSet<>();
 
     public Product() {
-    }
-
-    public long getId() {
-        return id;
     }
 
     public Product(String name, double price, int amount, String type, String producer, String description,
@@ -48,6 +45,26 @@ public class Product {
         this.type = type;
         this.description = description;
         this.addingDate = addingDate;
+    }
+
+    public Set<ProductObservation> getProductObservations() {
+        return productObservations;
+    }
+
+    public void setProductObservations(Set<ProductObservation> productObservations) {
+        this.productObservations = productObservations;
+    }
+
+    public List<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(List<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setId(long id) {
@@ -125,13 +142,5 @@ public class Product {
 
     public void setImages(Set<Image> images) {
         this.images = images;
-    }
-
-    public Set<ProductRate> getRates() {
-        return rates;
-    }
-
-    public void setRates(Set<ProductRate> rates) {
-        this.rates = rates;
     }
 }

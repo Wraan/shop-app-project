@@ -2,15 +2,12 @@ package com.shop.service;
 
 import com.shop.dto.ProductDto;
 import com.shop.dto.SpecificationDto;
-import com.shop.model.Image;
-import com.shop.model.Product;
-import com.shop.model.ProductSpecification;
-import com.shop.model.Specification;
+import com.shop.model.*;
 import com.shop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
+
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -53,6 +50,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductObservation findProductSubscriptionByUserAndProduct(User user, Product product) {
+        return productRepository.findProductObservationByUserAndProduct(user, product);
+    }
+
+    @Override
+    public List<Product> findFollowedProductsByUser(User user) {
+        List<ProductObservation> productObservations = productRepository.findProductObservationsByUser(user);
+        List<Product> products = new ArrayList<>();
+        for(ProductObservation po : productObservations){
+            products.add(po.getProduct());
+        }
+        return products;
+    }
+
     public void deleteProduct(Product product) {
         productRepository.delete(product);
     }

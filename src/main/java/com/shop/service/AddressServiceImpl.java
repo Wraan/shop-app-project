@@ -16,7 +16,7 @@ public class AddressServiceImpl implements AddressService {
         this.addressRepository = addressRepository;
     }
 
-    AddressRepository addressRepository;
+    private AddressRepository addressRepository;
 
     public Address getByID(Long id) throws EntityNotFoundException {
         Optional<Address> delivery = addressRepository.findById(id);

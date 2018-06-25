@@ -43,6 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] LOGGED_MATCHERS = {
+            "/cart",
+            "/cart/**",
+            "/product/follow",
+            "/followed",
+            "/addCartToSession",
+            "/settings",
+            "/settings/**",
             "/user/*"
     };
 
@@ -60,8 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
-                .defaultSuccessUrl("/")
-                .failureUrl("/")
+                .defaultSuccessUrl("/addCartToSession")
+                .failureUrl("/error")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
 
