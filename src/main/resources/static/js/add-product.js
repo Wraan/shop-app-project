@@ -23,17 +23,17 @@ $("#productForm").submit(function () {
     $("#jsonSpec").val(JSON.stringify(arr));
 
     // Validation
-    if(!validateItem($("#name"), new RegExp("^{1,50}$"),
-            "The maximum length for a product name is 50 characters."))
+    if(!validateItem($("#name"), new RegExp("^(.{1,250})$"),
+            "The maximum length for a product name is 250 characters."))
         return false;
     if(!validateItem($("#price"), new RegExp("^\\d{1,3}(?:[.,]\\d{3})*(?:[.,]\\d{2})$")
             ,"Wrong price syntax."))
         return false;
-    if(!validateItem($("#amount"), new RegExp("([0-9]{1,9}$)"),
-            "Amount can only be in range of 0 - 1 000 000."))
+    if(!validateItem($("#amount"), new RegExp("^([1-9][0-9]{0,2})$"),
+            "Amount can only be in range of 1 - 1 000."))
         return false;
-    if(!validateItem($("#producer"), new RegExp("^[.]{1,20}$"),
-            "The maximum length for a producer is 20 characters."))
+    if(!validateItem($("#producer"), new RegExp("^(.{1,100})$"),
+            "The maximum length for a producer is 100 characters."))
         return false;
 
     return true;

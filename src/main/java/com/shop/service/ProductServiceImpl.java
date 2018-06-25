@@ -76,6 +76,63 @@ public class ProductServiceImpl implements ProductService {
             return searchProductByNameAndCategory(searchedProductName,searchedProductCategory);
     }
 
+    @Override
+    public List<Product> searchProductByCategory(String category) {
+        switch(category){
+            case "GraphicsCards":
+                category = "Graphic Card";
+                break;
+            case "Processors":
+                category = "Processor";
+                break;
+            case "Motherboards":
+                category = "Motherboard";
+                break;
+            case "Memory":
+                category = "RAM";
+                break;
+            case "Monitors":
+                category = "Monitor";
+                break;
+            case "HDDdisks":
+                category = "HDD disks";
+                break;
+            case "SSDdisks":
+                category = "SSD disks";
+                break;
+            case "NetworkCards":
+                category = "Network cards";
+                break;
+            case "PowerSupplies":
+                category = "Power Supplies";
+                break;
+            case "PCCases":
+                category = "PC Cases";
+                break;
+            case "SoundCards":
+                category = "Sound Cards";
+                break;
+            case "Mice":
+                category = "Mouse";
+                break;
+            case "Keyboards":
+                category = "Keyboard";
+                break;
+            case "Microphones":
+                category = "Microphone";
+                break;
+            case "Speakers":
+                category = "Speakers";
+                break;
+            case "Headphones":
+                category = "Headphones";
+                break;
+            default:
+                break;
+        }
+        return productRepository.findProductByCategory(category);
+    }
+
     private List<Product> searchProductByName(String searchedProductName) {
         List<Product> resultList;
         resultList = productRepository.findProductByName(searchedProductName);
@@ -85,10 +142,6 @@ public class ProductServiceImpl implements ProductService {
     private List<Product> searchProductByNameAndCategory(String searchedProductName, String searchedProductCategory) {
         List<Product> resultList;
         resultList = productRepository.findProductByNameAndCategory(searchedProductName,searchedProductCategory);
-        for (Product p:resultList
-             ) {
-            System.out.println(p.getName()+p.getType());
-        }
         return resultList;
     }
 }
