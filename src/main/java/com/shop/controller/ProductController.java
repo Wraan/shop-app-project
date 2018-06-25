@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -74,8 +75,15 @@ public class ProductController {
         return "redirect:/followed";
     }
     @PostMapping("/searchProduct")
-    public String searchProduct(@RequestParam("searchedProductName") String productName,@RequestParam("searchedCategory") String searchedCategory ){
-        productService.searchProduct(productName,searchedCategory);
-        return "redirect:/";
+    public String searchProduct(@RequestParam("searchedProductName") String productName, @RequestParam("searchedCategory") String searchedCategory, Model model){
+        List<Product> products = productService.searchProduct(productName,searchedCategory);
+        model.addAttribute("products", products);
+        return "find-products";
+    }
+    @GetMapping("/category/{category}")
+    public String showCategory(@PathVariable("category") String category, Model model){
+        List<Product> products = productService.searchProductByCategory(category);
+        model.addAttribute("products", products);
+        return "find-products";
     }
 }

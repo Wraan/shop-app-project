@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head>
     <meta charset="utf-8">
@@ -22,36 +23,138 @@
 </head>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
+    <div class="container-fluid">
         <div class="collapse navbar-collapse mr-auto mt-1 mb-1" id="navbarNavAltMarkup">
-            <div class="navbar-nav mr-auto col-2">
+            <div class="navbar-nav mr-auto col-1">
                 <a class="navbar-brand" th:href="@{/}">SHOP-NAME</a>
             </div>
+            <div class="dropdown show col-1 mr-auto">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="abc" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="text-center row" style="width: 600px;">
+                            <ul class="list-unstyled col-4">
+                                <li><a class="dropdown-item" th:href="@{/category/GraphicsCards}">Graphics Cards</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Processors}">Processors</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Motherboards}">Motherboards</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Memory}">Memory</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Keyboards}">Keyboards</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Headphones}">Headphones</a></li>
+                            </ul>
+                            <ul class="list-unstyled col-4">
+                                <li><a class="dropdown-item" th:href="@{/category/Monitors}">Monitors</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/HDDdisks}">HDD disks</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/SSDdisks}">SSD disks</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/NetworkCards}">Network Cards</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Microphones}">Microphones</a></li>
+                            </ul>
+                            <ul class="list-unstyled col-4">
+                                <li><a class="dropdown-item" th:href="@{/category/PowerSupplies}">Power Supplies</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/PCCases}">PC Cases</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/SoundCards}">Sound Cards</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Mice}">Mice</a></li>
+                                <li><a class="dropdown-item" th:href="@{/category/Speakers}">Speakers</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="navbar-nav mr-auto col-8">
-                <div class="input-group ">
+                <form class="input-group" th:action="@{/searchProduct}" method="POST">
                     <input style="width: 50%" type="text" class="form-control" placeholder="" aria-label=""
-                           aria-describedby="basic-addon1">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option disabled selected>Choose category</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                           aria-describedby="basic-addon1" name="searchedProductName">
+                    <select class="custom-select" id="inputGroupSelect01" name="searchedCategory">
+                        <option selected value="All">All Categories</option>
+                        <option value="Graphic Card">Graphics Cards</option>
+                        <option value="Processor">Processors</option>
+                        <option value="Motherboard">Motherboards</option>
+                        <option value="RAM">Memory</option>
+                        <option value="Monitor">Monitors</option>
+                        <option value="HDD">HDD disks</option>
+                        <option value="SSD">SSD disks</option>
+                        <option value="Network card">Network Cards</option>
+                        <option value="Power Supply">Power Supplies</option>
+                        <option value="PC Case">PC Cases</option>
+                        <option value="Sound Card">Sound Cards</option>
+                        <option value="Mouse">Mice</option>
+                        <option value="Keyboard">Keyboards</option>
+                        <option value="Microphone">Microphones</option>
+                        <option value="Speakers">Speakers</option>
+                        <option value="Headphones">Headphones</option>
                     </select>
                     <div class="input-group-append">
-                        <button class="btn btn-primary text-light" type="button">Search</button>
+                        <button class="btn btn-primary text-light" type="submit">Search</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="navbar-nav mr-auto">
-                <a role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
+                <a sec:authorize="isAnonymous()" role="button" class="btn btn-primary ml-3 mr-3" href="#" data-toggle="modal"
                    data-target="#login-modal">Login</a>
-                <a class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+                <a sec:authorize="isAnonymous()" class="nav-item nav-link" th:href="@{/signUp}">Sign up</a>
+                <div sec:authorize="isAuthenticated()" class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/}">Bought</a>
+                        <a class="dropdown-item" th:href="@{/followed}">Followed</a>
+                        <div class="dropdown-divider"></div>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/admin/adminPage}">Admin Panel</a>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/user/settings}">Settings</a>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                    </div>
+                </div>
+                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </div>
     </div>
 </nav>
 <div class="container">
     <div class="row">
+        <!-- Login Modal -->
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="offset-2 col-8">
+                                <div class="well">
+                                    <form id="loginForm" method="POST" th:action="@{/signIn}">
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                   required title="Please enter you username"
+                                                   placeholder="Login"/>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                   required title="Please enter your password"/>
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                                        <a href="/forgot" class="btn btn-default btn-block">Forgot password</a>
+                                        <a th:href="@{/signUp}" class="btn btn-default btn-block">Register</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Login Modal -->
         <div class="col-12">
             <h1 class="offset-4">Followed: </h1>
             <div class="card col-12">

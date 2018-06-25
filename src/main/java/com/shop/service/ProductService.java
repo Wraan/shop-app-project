@@ -18,4 +18,5 @@ public interface ProductService {
     void deleteProduct(Product product);
 
     List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
+    List<Product> searchProductByCategory(String category);
 }

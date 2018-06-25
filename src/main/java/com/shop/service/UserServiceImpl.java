@@ -62,11 +62,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteProductSubscriptionFromUser(Product product, User user) {
-        ProductObservation productObservation = productService.findProductSubscriptionByUserAndProduct(user,product);
-        if(productObservation != null){
+        ProductObservation productObservation = productService.findProductSubscriptionByUserAndProduct(user, product);
+        if (productObservation != null) {
             user.getProductObservations().remove(productObservation);
             userRepository.save(user);
         }
+    }
     public User updateUser(User user) {
         return userRepository.save(user);
     }
