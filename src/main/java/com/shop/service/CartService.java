@@ -4,6 +4,7 @@ import com.shop.model.Cart;
 import com.shop.model.Product;
 import com.shop.model.User;
 
+import java.util.Calendar;
 import java.util.List;
 
 public interface CartService {
@@ -16,4 +17,6 @@ public interface CartService {
     Cart addProductToCart(Product product, Cart cart);
 
     Cart deleteProductFromCart(Product product, Cart cart);
+
+    List<Product> findMostPopularProducts();
 }
