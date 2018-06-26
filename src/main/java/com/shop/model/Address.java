@@ -1,6 +1,8 @@
 package com.shop.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
@@ -14,6 +16,16 @@ public class Address {
     @ManyToOne
     private User user;
 
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Cart> carts = new ArrayList<>();
 
     private String firstname;
     private String lastname;

@@ -26,7 +26,7 @@ $("#productForm").submit(function () {
     if(!validateItem($("#name"), new RegExp("^(.{1,250})$"),
             "The maximum length for a product name is 250 characters."))
         return false;
-    if(!validateItem($("#price"), new RegExp("^\\d{1,3}(?:[.,]\\d{3})*(?:[.,]\\d{2})$")
+    if(!validateItem($("#price"), new RegExp("^\\d{1,6}(?:[.,]\\d{3})*(?:[.,]\\d{2})$")
             ,"Wrong price syntax."))
         return false;
     if(!validateItem($("#amount"), new RegExp("^([1-9][0-9]{0,2})$"),

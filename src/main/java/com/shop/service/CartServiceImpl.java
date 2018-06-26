@@ -67,4 +67,15 @@ public class CartServiceImpl implements CartService {
 
         return cartRepository.save(newCart);
     }
+
+    @Override
+    public double getCartPrice(Cart cart) {
+        Cart newCart = findById(cart.getId());
+        double price = 0;
+        List<Product> products = getProductsFromCart(newCart);
+        for(Product product : products){
+            price += product.getPrice();
+        }
+        return price;
+    }
 }

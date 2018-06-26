@@ -14,9 +14,12 @@
     <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="/css/index.css" rel="stylesheet">
     <link href="/css/all.css" rel="stylesheet">
 
+    <!-- Icons from Font Awesome-->
     <link href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
@@ -110,7 +113,7 @@
     </div>
 </nav>
 <div class="container">
-    <div class="row" style="margin-top:10px">
+    <div class="row">
         <!-- Login Modal -->
         <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalTitle"
              aria-hidden="true">
@@ -152,54 +155,25 @@
             </div>
         </div>
         <!-- End of Login Modal -->
-        <div class="offset-4 col-4">
-            <div th:if="${param.err != null}" class="alert alert-danger" role="alert">
-                Error occurred. Please try again.
+        <div class="card mt-5 col-6">
+            <div th:object="${address}" class="card-body">
+                <h5><p th:text="${address.firstname}+' '+${address.lastname}" class="card-link"></p> </h5>
+                <h5><p th:text="${address.street}" class="card-link"></p> </h5>
+                <h5><p th:text="${address.zipCode}+' '+${address.city}" class="card-link"></p> </h5>
+                <h5><p th:text="'Phone: '+${address.phone}" class="card-link"></p> </h5>
             </div>
         </div>
-        <div class="offset-4 col-4">
-                <h2>Add product</h2>
-                <a type="button" th:href="@{/admin/addProduct}" class="btn btn-success btn-block">Add Product</a>
-        </div>
-    </div>
-    <div class="row" style="margin-top:20px">
-        <div class="offset-4 col-4">
-            <form id="deleteProductForm" method="POST" th:action="@{/admin/removeProduct}">
-                <div class="form-group">
-                <h2>Remove Product</h2>
-                    <input type="number" class="form-control" id="productToRemoveID" name="productToRemoveID"
-                           required title="Enter product name"
-                           placeholder="Id. . ."/>
+        <div class="col-6 mt-5">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    <h5 th:text="'Total price: ' + ${price} + '$'"></h5>
+                    <h5 th:text="'Transport price: 15$'"></h5>
                 </div>
-                <button type="submit" class="btn btn-danger btn-block">Remove</button>
-            </form>
+            </div>
         </div>
-    </div>
-    <div class="row" style="margin-top:20px">
-        <div class="offset-4 col-4">
-            <form id="changeProductAmount" method="POST" th:action="@{/admin/changeProductAmount}">
-                <h2>Change Product Amount</h2>
-                <div class="form-group">
-                    <input type="number" class="form-control" id="productToChangeID" name="productToChangeID"
-                           required title="Enter product name" placeholder="Id. . ."/>
-                    <input type="number" class="form-control" id="productAmount" name="amountToChange"
-                           required title="Enter amount" style="margin-top:10px" placeholder="Enter amount" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Change</button>
-            </form>
-        </div>
-    </div>
-    <div class="row" style="margin-top:20px">
-        <div class="offset-4 col-4">
-            <form id="changeBanStatusForm" method="POST" th:action="@{/admin/changeBanStatus}">
-                <h2>Change Ban status</h2>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="usernameToChange" name="userToChange"
-                           required title="Enter username"
-                           placeholder="Name. . ."/>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Change</button>
-            </form>
+        <div class="col-12">
+            <a th:href="@{/order/confirm}" type="submit" class="btn btn-lg btn-success float-right mt-3">Confirm</a>
         </div>
     </div>
 </div>
@@ -207,6 +181,6 @@
 <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="/webjars/popper.js/1.14.1/popper.js"></script>
-<script src="/js/signup-validate.js"></script>
+<script src="/js/add-product.js"></script>
 </body>
 </html>

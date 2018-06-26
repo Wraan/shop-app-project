@@ -15,11 +15,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     private DtoService dtoService;
     private SpecificationService specificationService;
+    private CartService cartService;
 
-    public ProductServiceImpl(ProductRepository productRepository, DtoService dtoService, SpecificationService specificationService){
+    public ProductServiceImpl(ProductRepository productRepository, DtoService dtoService, SpecificationService specificationService, CartService cartService){
         this.productRepository = productRepository;
         this.dtoService = dtoService;
         this.specificationService = specificationService;
+        this.cartService = cartService;
     }
 
     @Override
@@ -141,6 +143,24 @@ public class ProductServiceImpl implements ProductService {
             newestProducts.add(resultSet.get(i));
         }
         return  newestProducts;
+    }
+
+    @Override
+    public Cart buyProductsInCart(Cart cart, Address address) {
+        Cart newCart = cartService.findById(cart.getId());
+        List<Product> products = cartService.getProductsFromCart(newCart);
+        for(Product product : products){
+            if(product.getAmount() < 1)
+                return null;
+            product.setAmount(product.getAmount() - 1);
+        }
+        for(Product product : products){
+            save(product);
+        }
+        newCart.setAddress(address);
+        newCart.setBought(true);
+        newCart.setPurchaseDate(Calendar.getInstance());
+        return cartService.save(newCart);
     }
 
     private List<Product> searchProductByName(String searchedProductName) {
