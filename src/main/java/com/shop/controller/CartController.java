@@ -70,4 +70,10 @@ public class CartController {
         session.setAttribute("cart", cart);
         return "redirect:/cart";
     }
+
+    @GetMapping("/pop")
+    public String popular(){
+        cartService.findMostPopularProducts();
+        return "redirect:/";
+    }
 }
