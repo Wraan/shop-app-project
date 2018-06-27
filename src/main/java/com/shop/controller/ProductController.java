@@ -83,10 +83,4 @@ public class ProductController {
         model.addAttribute("products", products);
         return "find-products";
     }
-
-    @GetMapping("/newest")
-    public String newest(){
-        productService.findNewestProducts(4);
-        return "redirect:/";
-    }
 }

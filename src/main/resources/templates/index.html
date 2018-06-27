@@ -181,134 +181,40 @@
         <!-- End of Carousel -->
         <!-- Popular this month -->
         <div class="mt-3">
-            <h1 class="col-12">Popular this month:</h1>
-            <div class="card-group mt-3">
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/977784_0_f.jpg"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/1042371_1_f.jpg"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                            content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/878521_0_f.png"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer content than the first to show that equal
-                            height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/879401_0_f.png"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer content than the first to show that equal
-                            height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="btn-lg btn-primary text-light offset-5 col-2 mt-3" type="button">More</button>
-        <!-- New this month -->
-        <div class="mt-3">
             <h1 class="col-12">New this month:</h1>
             <div class="card-group mt-3">
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/977784_0_f.jpg"
-                             alt="Card image cap">
+                <div th:each="newProd : ${newest}" class="card">
+                    <div th:if="${!newProd.images.isEmpty()}">
+                        <a th:href="@{/product/{id}(id=${newProd.id})}"><img class="card-img-top card-image" th:src="${newProd.images[0].url}"></a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <h5 class="card-title"><a th:href="@{/product/{id}(id=${newProd.id})}" th:text="${newProd.name}" class="card-link"></a></h5>
+                        <p class="card-text" th:text="*{newProd.type}">Type</p>
                     </div>
                     <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/1042371_1_f.jpg"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                            content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/878521_0_f.png"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer content than the first to show that equal
-                            height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="picture mt-2">
-                        <img class="card-img-top card-image" src="https://images.morele.net/full/879401_0_f.png"
-                             alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer content than the first to show that equal
-                            height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <h5 class="text-center text-primary">500,00$</h5>
+                        <h5 class="text-center text-primary" th:text="${newProd.price}+'$'">Price</h5>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="btn-lg btn-primary text-light offset-5 col-2 mt-3 mb-5" type="button">More</button>
+        <!-- New this month -->
+        <div class="mt-3">
+            <h1 class="col-12">Popular this month:</h1>
+            <div class="card-group mt-3">
+                <div th:each="pop : ${popular}" class="card">
+                    <div th:if="${!pop.images.isEmpty()}">
+                        <a th:href="@{/product/{id}(id=${pop.id})}"><img class="card-img-top card-image" th:src="${pop.images[0].url}"></a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a th:href="@{/product/{id}(id=${pop.id})}" th:text="${pop.name}" class="card-link"></a></h5>
+                        <p class="card-text" th:text="*{pop.type}">Type</p>
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="text-center text-primary" th:text="${pop.price}+'$'">Price</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
