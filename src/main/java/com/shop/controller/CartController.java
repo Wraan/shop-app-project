@@ -134,4 +134,9 @@ public class CartController {
         model.addAttribute("carts", carts);
         return "carts-bought";
     }
+    @GetMapping("/pop")
+    public String popular(){
+        cartService.findMostPopularProducts();
+        return "redirect:/";
+    }
 }
