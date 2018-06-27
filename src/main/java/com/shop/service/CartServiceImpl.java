@@ -81,8 +81,8 @@ public class CartServiceImpl implements CartService {
         return price;
     }
   
-    public List<Product> findMostPopularProducts() {
-        return countProducts(findCartsWithinOneMonth());
+    public List<Product> findMostPopularProducts(int number) {
+        return countProducts(findCartsWithinOneMonth(), number);
     }
 
     private List<Cart> findCartsWithinOneMonth(){
@@ -94,7 +94,7 @@ public class CartServiceImpl implements CartService {
         return resultSet;
     }
 
-    private List<Product> countProducts(List<Cart> carts){
+    private List<Product> countProducts(List<Cart> carts, int number){
         List<Product> products = new ArrayList<>();
         List<Integer> productNumber = new ArrayList<>();
         for(Cart c : carts){
@@ -112,7 +112,7 @@ public class CartServiceImpl implements CartService {
             }
         }
         doubleBubbleSort(products,productNumber);
-        List<Product> popularProducts = mostPopularProducts(4,products);
+        List<Product> popularProducts = mostPopularProducts(number,products);
         return popularProducts;
     }
 

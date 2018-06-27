@@ -15,10 +15,8 @@ public interface ProductService {
     ProductObservation findProductSubscriptionByUserAndProduct(User user, Product product);
     List<Product> findFollowedProductsByUser(User user);
     void deleteProduct(Product product);
-
     List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
     List<Product> searchProductByCategory(String category);
     List<Product> findNewestProducts(int inumberOfProducts);
-
     Cart buyProductsInCart(Cart cart, Address address);
 }

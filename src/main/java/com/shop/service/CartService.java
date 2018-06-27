@@ -16,5 +16,5 @@ public interface CartService {
     Cart addProductToCart(Product product, Cart cart);
     Cart deleteProductFromCart(Product product, Cart cart);
     double getCartPrice(Cart cart);
-    List<Product> findMostPopularProducts();
+    List<Product> findMostPopularProducts(int number);
 }

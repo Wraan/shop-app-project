@@ -97,22 +97,22 @@ public class ProductServiceImpl implements ProductService {
                 category = "Monitor";
                 break;
             case "HDDdisks":
-                category = "HDD disks";
+                category = "HDD";
                 break;
             case "SSDdisks":
-                category = "SSD disks";
+                category = "SSD";
                 break;
             case "NetworkCards":
-                category = "Network cards";
+                category = "Network card";
                 break;
             case "PowerSupplies":
-                category = "Power Supplies";
+                category = "Power Supply";
                 break;
             case "PCCases":
-                category = "PC Cases";
+                category = "PC Case";
                 break;
             case "SoundCards":
-                category = "Sound Cards";
+                category = "Sound Card";
                 break;
             case "Mice":
                 category = "Mouse";
