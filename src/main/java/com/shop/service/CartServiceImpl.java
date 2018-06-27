@@ -71,6 +71,16 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public double getCartPrice(Cart cart) {
+        Cart newCart = findById(cart.getId());
+        double price = 0;
+        List<Product> products = getProductsFromCart(newCart);
+        for(Product product : products){
+            price += product.getPrice();
+        }
+        return price;
+    }
+  
     public List<Product> findMostPopularProducts() {
         return countProducts(findCartsWithinOneMonth());
     }
@@ -138,5 +148,4 @@ public class CartServiceImpl implements CartService {
         else
             return  products;
     }
-
 }

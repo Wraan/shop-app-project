@@ -1,6 +1,7 @@
 package com.shop.model;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -20,6 +21,8 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<CartProduct> cartProducts = new ArrayList<>();
     private boolean bought;
+    @ManyToOne
+    private Address address;
 
     public Cart() {
     }
@@ -31,6 +34,14 @@ public class Cart {
 
     public Cart(User user) {
         this.user = user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<CartProduct> getCartProducts() {
@@ -71,5 +82,13 @@ public class Cart {
 
     public void setBought(boolean bought) {
         this.bought = bought;
+    }
+
+    public String getDateString(){
+        Calendar cal = this.purchaseDate;
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        return format.format(cal.getTime());
     }
 }

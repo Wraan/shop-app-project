@@ -13,10 +13,8 @@ public interface CartService {
     Cart save(Cart cart);
     List<Product> getProductsFromCart(Cart cart);
     Cart findById(long id);
-
     Cart addProductToCart(Product product, Cart cart);
-
     Cart deleteProductFromCart(Product product, Cart cart);
-
+    double getCartPrice(Cart cart);
     List<Product> findMostPopularProducts();
 }
