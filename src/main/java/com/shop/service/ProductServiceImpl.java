@@ -137,12 +137,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findNewestProducts(int numberOfProducts) {
-        List<Product> resultSet = productRepository.findFourNewestProducts();
+        List<Product> resultSet = productRepository.findNewestProducts();
         List<Product> newestProducts = new ArrayList<>();
-        for(int i =0;i<numberOfProducts;i++){
-            newestProducts.add(resultSet.get(i));
+        if(resultSet.size()<= numberOfProducts)
+            return resultSet;
+        else{
+            for(int i =0;i<numberOfProducts;i++){
+                newestProducts.add(resultSet.get(i));
+            }
+            return  newestProducts;
         }
-        return  newestProducts;
     }
 
     @Override

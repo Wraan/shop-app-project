@@ -31,5 +31,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductByCategory(@Param(value = "productCategory") String productCategory);
 
     @Query("select p from Product p order by  p.addingDate desc ")
-    List<Product> findFourNewestProducts();
+    List<Product> findNewestProducts();
 }

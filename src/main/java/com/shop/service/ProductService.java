@@ -17,6 +17,6 @@ public interface ProductService {
     void deleteProduct(Product product);
     List<Product> searchProduct(String searchedProductName, String searchedProductCategory);
     List<Product> searchProductByCategory(String category);
-    List<Product> findNewestProducts(int inumberOfProducts);
+    List<Product> findNewestProducts(int numberOfProducts);
     Cart buyProductsInCart(Cart cart, Address address);
 }
