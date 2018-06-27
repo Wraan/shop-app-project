@@ -169,7 +169,7 @@
                     <h6 class="card-subtitle mb-2 text-muted" th:text="${product.price} + '$'"></h6>
                 </div>
             </div>
-            <a th:href="@{/cart/confirmAddress}" type="submit" class="btn-lg btn-success mt-3 float-right">Continue to payment</a>
+            <a th:if="${!buyBtn}" th:href="@{/cart/confirmAddress}" type="submit" class="btn-lg btn-success mt-3 float-right">Continue to payment</a>
         </div>
     </div>
 </div>
