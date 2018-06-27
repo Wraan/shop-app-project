@@ -35,7 +35,9 @@ $("#productForm").submit(function () {
     if(!validateItem($("#producer"), new RegExp("^(.{1,100})$"),
             "The maximum length for a producer is 100 characters."))
         return false;
-
+    if(!validateItem($("#description"), new RegExp("^(.{1,255})$"),
+            "The maximum length for a description is 255 characters."))
+        return false;
     return true;
 });
 

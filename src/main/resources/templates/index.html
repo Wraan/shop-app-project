@@ -185,7 +185,8 @@
             <div class="card-group mt-3">
                 <div th:each="newProd : ${newest}" class="card">
                     <div th:if="${!newProd.images.isEmpty()}">
-                        <a th:href="@{/product/{id}(id=${newProd.id})}"><img class="card-img-top card-image" th:src="${newProd.images[0].url}"></a>
+                        <a th:href="@{/product/{id}(id=${newProd.id})}"><img class="card-img-top card-image"
+                                 style="height: 280px; width: 280px" th:src="${newProd.images[0].url}"></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><a th:href="@{/product/{id}(id=${newProd.id})}" th:text="${newProd.name}" class="card-link"></a></h5>
@@ -203,7 +204,8 @@
             <div class="card-group mt-3">
                 <div th:each="pop : ${popular}" class="card">
                     <div th:if="${!pop.images.isEmpty()}">
-                        <a th:href="@{/product/{id}(id=${pop.id})}"><img class="card-img-top card-image" th:src="${pop.images[0].url}"></a>
+                        <a th:href="@{/product/{id}(id=${pop.id})}"><img class="card-img-top card-image"
+                               style="height: 280px; width: 280px" th:src="${pop.images[0].url}"></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><a th:href="@{/product/{id}(id=${pop.id})}" th:text="${pop.name}" class="card-link"></a></h5>

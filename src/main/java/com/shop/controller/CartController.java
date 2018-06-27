@@ -66,14 +66,18 @@ public class CartController {
     @PostMapping("/cart/add/{id}")
     public String addProductToCart(@PathVariable("id") long id, HttpSession session){
         Product product = productService.findById(id);
-        Cart cart = cartService.addProductToCart(product, (Cart) session.getAttribute("cart"));
+        Cart cart = (Cart) session.getAttribute("cart");
+        cart = cartService.findById(cart.getId());
+        cart = cartService.addProductToCart(product, cart);
         session.setAttribute("cart", cart);
         return "redirect:/product/" + id;
     }
     @PostMapping("/cart/delete/{id}")
     public String deleteProductFromCart(@PathVariable("id") long id, HttpSession session){
         Product product = productService.findById(id);
-        Cart cart = cartService.deleteProductFromCart(product, (Cart) session.getAttribute("cart"));
+        Cart cart = (Cart) session.getAttribute("cart");
+        cart = cartService.findById(cart.getId());
+        cart = cartService.deleteProductFromCart(product, cart);
         session.setAttribute("cart", cart);
         return "redirect:/cart";
     }
